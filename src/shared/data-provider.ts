@@ -42,10 +42,8 @@ export const dataProvider = (apiUrl: string) => ({
         }
 
         if (filters) {
-            query.where = JSON.stringify(filterToParams(filters));
+            query.where = JSON.stringify(filters);
         }
-
-        console.log(query)
 
         const url = `${apiUrl}/${resource}`;
         const { data } = await axiosInstance.get(`${url}/?${queryString.stringify(query)}`, {
