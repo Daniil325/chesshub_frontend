@@ -1,0 +1,28 @@
+.postHeader {
+    font-family: "Montserrat-ExtraBold";
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 48.76px;
+    letter-spacing: 0%;
+    color: #4D3417;
+}
+
+.postDescription, .postDigit, .authorNickname {
+    font-family: "Montserrat-Bold";
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39.01px;
+    letter-spacing: 0%;
+}
+
+.postDescription {
+    color: #73552F;
+}
+
+.postDigit {
+    color: #A79278;
+}
+
+.authorNickname {
+    color: #3F2B12;
+}
