@@ -2,32 +2,44 @@ import axios from "axios";
 import queryString from "query-string";
 
 type MethodTypes = "get" | "delete" | "head" | "options";
-type MethodTypesWithBody = "post" | "put" | "patch"
+type MethodTypesWithBody = "post" | "put" | "patch";
 
 type SortObject = {
-    field: string,
-    order: "desc" | "asc"
-}
+    field: string;
+    order: "desc" | "asc";
+};
 
 const axiosInstance = axios.create();
 
+class BaseQueryService {
+    resource;
+    constructor(resource: string) {
+        this.resource = resource;
+    }
 
-function generateSort(sorters: SortObject[]) {
-    return sorters.map(it => `${it.field}${it.order === 'desc' && '-' || ''}`).join(',');
+    static getList() {
+        return axiosInstance.get(this.resource);
+    }
+
+    static getOne(id: string) {
+        return axiosInstance.get(`${this.resource}/${id}`);
+    }
 }
 
+function generateSort(sorters: SortObject[]) {
+    return sorters.map((it) => `${it.field}${(it.order === "desc" && "-") || ""}`).join(",");
+}
 
 export const dataProvider = (apiUrl: string) => ({
     getList: async ({ resource, pagination, sorters, filters }) => {
-
         const { current: page = 1, pageSize = 100 } = pagination ?? {};
         const query: {
-            page?: number,
-            per_page?: number,
-            order?: string,
-            where?: string,
-            limit?: number,
-            token?: string
+            page?: number;
+            per_page?: number;
+            order?: string;
+            where?: string;
+            limit?: number;
+            token?: string;
         } = {
             page,
             per_page: pageSize,
@@ -38,7 +50,7 @@ export const dataProvider = (apiUrl: string) => ({
         }
 
         if (pageSize) {
-            query.limit = pageSize
+            query.limit = pageSize;
         }
 
         if (filters) {
@@ -48,8 +60,8 @@ export const dataProvider = (apiUrl: string) => ({
         const url = `${apiUrl}/${resource}`;
         const { data } = await axiosInstance.get(`${url}/?${queryString.stringify(query)}`, {
             headers: {
-                Authorization: "iskksioskassyidd"
-            }
+                Authorization: "iskksioskassyidd",
+            },
         });
         const total = data.total;
 
@@ -69,7 +81,7 @@ export const dataProvider = (apiUrl: string) => ({
 
         const { data } = await axiosInstance[requestMethod](url, { headers });
         return {
-            data: data?.item
+            data: data?.item,
         };
     },
 
@@ -114,5 +126,5 @@ export const dataProvider = (apiUrl: string) => ({
         return {
             data,
         };
-    }
+    },
 });

@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.8",
+    "@editorjs/header": "^2.8.8",
     "@tanstack/react-query": "^5.66.7",
     "axios": "^1.7.9",
+    "chess.js": "^1.1.0",
     "query-string": "^9.1.1",
     "react": "^19.0.0",
     "react-aria": "^3.37.0",
+    "react-chessboard": "^4.7.2",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5"
   },
