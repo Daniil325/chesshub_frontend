@@ -1,0 +1,11 @@
+.main {
+    margin: auto;
+    max-width: 1500px;
+    background-color: #ecdfce;
+}
+
+.main_container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}

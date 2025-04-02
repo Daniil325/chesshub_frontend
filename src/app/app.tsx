@@ -8,8 +8,9 @@ import List from "@editorjs/list";
 import Table from "@editorjs/Table";
 import ReactDOM from "react-dom/client";
 import { Header as MainHeader } from "../components/organisms/Header";
-import Article from "../components/organisms/Article";
-import Sidebar from "../components/organisms/Sidebar";
+import { Article } from "../components/organisms/Article";
+import { Sidebar } from "../components/organisms/Sidebar";
+import { MainPage } from "@/pages/Main";
 
 const DEFAULT_INITIAL_DATA = {
     time: new Date().getTime(),
@@ -29,12 +30,12 @@ export const Board = (changeData) => {
     const [moveLog, setMoveLog] = useState([]);
 
     const moveBack = () => {
-        const currentMovies = moveLog.slice(0, -1)
-        setMoveLog(moveLog.slice(0, -1))
-        console.log(moveLog)
-       
-        game.fen()
-    }
+        const currentMovies = moveLog.slice(0, -1);
+        setMoveLog(moveLog.slice(0, -1));
+        console.log(moveLog);
+
+        game.fen();
+    };
 
     const onDrop = useCallback(
         (sourceSquare, targetSquare) => {
@@ -87,7 +88,8 @@ export const Board = (changeData) => {
                         </div>
                     )}
 
-                    <p onClick={moveBack}>{"<<"}</p><p>{">>"}</p>
+                    <p onClick={moveBack}>{"<<"}</p>
+                    <p>{">>"}</p>
                 </div>
             </div>
         </div>
@@ -180,16 +182,7 @@ const EditorComponent = () => {
 export function App() {
     return (
         <>
-            <MainHeader />
-            <main className="main">
-                <div>
-                    <Article />
-                    <Article />
-                </div>
-                
-                <Sidebar />
-            </main>
-            
+            <MainPage />
         </>
     );
 }
