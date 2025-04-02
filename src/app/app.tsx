@@ -4,7 +4,12 @@ import { Chessboard } from "react-chessboard";
 import "./App.css";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
+import List from "@editorjs/list";
+import Table from "@editorjs/Table";
 import ReactDOM from "react-dom/client";
+import { Header as MainHeader } from "../components/organisms/Header";
+import Article from "../components/organisms/Article";
+import Sidebar from "../components/organisms/Sidebar";
 
 const DEFAULT_INITIAL_DATA = {
     time: new Date().getTime(),
@@ -23,6 +28,14 @@ export const Board = (changeData) => {
     const [game, setGame] = useState(new Chess());
     const [moveLog, setMoveLog] = useState([]);
 
+    const moveBack = () => {
+        const currentMovies = moveLog.slice(0, -1)
+        setMoveLog(moveLog.slice(0, -1))
+        console.log(moveLog)
+       
+        game.fen()
+    }
+
     const onDrop = useCallback(
         (sourceSquare, targetSquare) => {
             try {
@@ -34,7 +47,7 @@ export const Board = (changeData) => {
 
                 if (move) {
                     setGame(new Chess(game.fen()));
-                    const moveNotation = `${game.turn() === "w" ? "Black" : "White"}: ${move.san}`;
+                    const moveNotation = move.san;
                     setMoveLog((prev) => [...prev, moveNotation]);
                     changeData((prev) => [...prev, moveNotation]);
                     return true;
@@ -49,20 +62,32 @@ export const Board = (changeData) => {
 
     return (
         <div className="board_container">
-            <Chessboard position={game.fen()} onPieceDrop={onDrop} autoPromoteToQueen={true} />
-
-            <div>
-                <h2 style={{ marginBottom: "15px", fontSize: "18px" }}>Move History</h2>
+            <Chessboard
+                position={game.fen()}
+                onPieceDrop={onDrop}
+                autoPromoteToQueen={true}
+            />
+            <div className="move_list">
                 <div>
                     {moveLog.length > 0 ? (
                         moveLog.map((move, index) => (
-                            <div key={index}>{`${Math.floor(index / 2) + 1}. ${move}`}</div>
+                            <div key={index}>{`${
+                                Math.floor(index / 2) + 1
+                            }. ${move}`}</div>
                         ))
                     ) : (
-                        <div style={{ textAlign: "center", color: "#666", fontStyle: "italic" }}>
+                        <div
+                            style={{
+                                textAlign: "center",
+                                color: "#666",
+                                fontStyle: "italic",
+                            }}
+                        >
                             No moves yet
                         </div>
                     )}
+
+                    <p onClick={moveBack}>{"<<"}</p><p>{">>"}</p>
                 </div>
             </div>
         </div>
@@ -127,6 +152,8 @@ const EditorComponent = () => {
             tools: {
                 header: Header,
                 board: BoardTool,
+                list: List,
+                table: Table,
             },
         });
     };
@@ -153,7 +180,16 @@ const EditorComponent = () => {
 export function App() {
     return (
         <>
-            <EditorComponent />
+            <MainHeader />
+            <main className="main">
+                <div>
+                    <Article />
+                    <Article />
+                </div>
+                
+                <Sidebar />
+            </main>
+            
         </>
     );
 }

@@ -1,20 +1,28 @@
-import React from 'react';
+import React from "react";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     return (
-        <header className='header'>
-            <div className='header-top'>
+        <header className="header">
+            <div className="header-top">
                 <h1>ChessHub</h1>
                 <img src="/img/ава_конь.svg" alt="###" />
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Выйти</a></li>
-                    <li><a href="#">Выйти</a></li>
-                    <li><a href="#">Выйти</a></li>
-                    <li><a href="#">Выйти</a></li>
+                    <li>
+                        <a href="#">Выйти</a>
+                    </li>
+                    <li>
+                        <a href="#">Выйти</a>
+                    </li>
+                    <li>
+                        <a href="#">Выйти</a>
+                    </li>
+                    <li>
+                        <a href="#">Выйти</a>
+                    </li>
                 </ul>
-                <div className='icons'>
+                <div className="icons">
                     <img src="/img/пен.svg" alt="###" />
                     <img src="/img/лупа.svg" alt="###" />
                 </div>
@@ -22,5 +30,3 @@ const Header: React.FC = () => {
         </header>
     );
 };
-
-export default Header;
