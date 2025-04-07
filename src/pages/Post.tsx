@@ -1,10 +1,11 @@
-import Header from './components/Header';
-import Article from './components/Article/Article';
-import Sidebar from './components/Sidebar';
+import {Header} from '@/components/Header';
+import {Article} from '@/components/ArticlePOST/Article';
+import {Sidebar} from '@/components/Sidebar';
 
-import CommentSection from './components/CommentSection/CommentSection';
+import {CommentSection} from '@/components/CommentSection/CommentSection';
 
-const App: React.FC = () =>{
+
+const Post: React.FC = () =>{
   return (
     <div className="app">
       <Header/>
@@ -12,7 +13,7 @@ const App: React.FC = () =>{
           
         
           <div className='content'>
-           <Article />
+           <Article/>
            <CommentSection />
           </div>
           <Sidebar />
@@ -28,4 +29,4 @@ const App: React.FC = () =>{
   
 };
 
-export default App;
+export default Post;

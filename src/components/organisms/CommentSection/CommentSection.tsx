@@ -31,7 +31,7 @@ const CommentSection: React.FC = () => {
                     <span className={styles.nickname}>author nickname</span>
                     <span className={styles.date}>11.09.2001</span>
                 </div>
-                <p className={styles.p1}>
+                <p className={styles.text}>
                     Tincidunt senectus litora primis, arcu inceptos tincidunt gravida. Ridiculus etiam ultrices non
                     facilisi leo; non finibus porta.
                 </p>
@@ -53,7 +53,7 @@ const CommentSection: React.FC = () => {
                     <span className={styles.nickname}>author nickname</span>
                     <span className={styles.date}>11.09.2001</span>
                 </div>
-                <p className={styles.p1}>
+                <p className={styles.text}>
                     Tincidunt senectus litora primis, arcu inceptos tincidunt gravida. Ridiculus etiam ultrices non
                     facilisi leo; non finibus porta.
                 </p>
@@ -75,7 +75,7 @@ const CommentSection: React.FC = () => {
                     <span className={styles.nickname}>author nickname</span>
                     <span className={styles.date}>11.09.2001</span>
                 </div>
-                <p className={styles.p1}>
+                <p className={styles.text}>
                     Tincidunt senectus litora primis, arcu inceptos tincidunt gravida. Ridiculus etiam ultrices non
                     facilisi leo; non finibus porta.
                 </p>

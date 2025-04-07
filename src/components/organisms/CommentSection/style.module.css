@@ -63,7 +63,7 @@
 }
 
 
-.comments .p1{
+.comments .text{
     margin-left:10px ;
 }
 .author_info {
@@ -92,7 +92,7 @@
     color: #A79278; 
 }
 
-.p1{
+.text{
     font-size: 24px;
     color:#73552F ;
     font-weight: 700;
