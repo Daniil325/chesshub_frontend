@@ -1,0 +1,138 @@
+.comment_input{
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    background-color: FFF9F1; 
+    padding: 10px; 
+    
+}
+
+.comment_input_logo{
+    width: 60px;
+    height: 60px;
+    object-fit: contain; 
+}
+
+ .writeacomment::placeholder{
+    color: #A79278; 
+    font-size: 22px; 
+    opacity: 1; 
+}
+
+.comment_input input {
+    flex: 1; 
+    border: none; 
+    outline: none;  
+    font-size: 22px; 
+    color: #4D3417; 
+    background-color: transparent; 
+}
+
+.comment_input button {
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.comment_input_button  {
+    width: 60px;
+    height: 60px;
+    object-fit: contain; 
+}
+.maincomment{
+    margin-left: 20px;
+    color: #A79278;
+}
+
+
+.comments{
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #FFF9F1;
+    
+    
+}
+
+.comments h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #4D3417; 
+    margin-bottom: 34px;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+
+.comments .text{
+    margin-left:10px ;
+}
+.author_info {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    margin-bottom: 10px;
+}
+
+.author_info img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+   
+}
+
+.author_info .nickname {
+    font-size: 28px;
+    font-weight: 700;
+    color: #3F2B12; 
+}
+
+.author_info .date {
+    font-size: 28px;
+    font-weight: 700;
+    color: #A79278; 
+}
+
+.text{
+    font-size: 24px;
+    color:#73552F ;
+    font-weight: 700;
+}
+
+
+
+.reactions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.answer {
+    font-size: 20px;
+    font-weight: 700;
+    color: #A79278; 
+    margin-left: 10px;
+    
+
+}
+.icongreen, .iconred {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #A79278; 
+    margin-right: 20px;
+    
+}
+.icongreen img {
+    width: 50px;
+    height: 50px;
+    margin-left: 600px;
+}
+
+.iconred img {
+    width: 50px;
+    height: 50px;
+
+    
+}
