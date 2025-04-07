@@ -1,0 +1,64 @@
+.profile_info {
+    background-color: #FFF9F1;
+}
+
+.head_sub {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 25px;
+    align-items: center; 
+    background-color: #D6C1AD;
+}
+
+.head_sub span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    color: #4D3417; 
+}
+
+
+.section {
+    margin-bottom: 60px; 
+
+}
+.sub_info {
+    
+    display: flex;
+    align-items: center;
+    margin: 25px 30px;
+}
+
+.avatar img {
+    width: 60px ;
+    height: 60px ;
+}
+
+.nicname_sub span{
+    margin-left: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #3F2B12; 
+}
+
+.rating_green span{
+    margin-left: 500px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #9FB162;
+}
+
+.rating_red span{
+    margin-left: 500px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #FF3C3C;
+}
+
+.rating_grey span{
+    margin-left: 500px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #73552F;
+}
