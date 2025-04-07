@@ -1,0 +1,30 @@
+.author_info {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    background-color: #FFF9F1;
+}
+.avatar img {
+    width: 100px ;
+    height: 100px ;
+    margin-left: 44px;
+}
+.author_details h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #3F2B12; 
+  
+}
+.author_details p {
+    font-size: 36px;
+    font-weight: 500;
+    color: #3F2B12; 
+    
+  
+}
+
+.author_details .p1{
+    font-size: 26px;
+    color: #73552F;
+    margin-bottom: 100px;
+}

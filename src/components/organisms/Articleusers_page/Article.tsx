@@ -74,3 +74,5 @@ const Article: React.FC = () => {
         </article>
     );
 };
+
+export default Article;
