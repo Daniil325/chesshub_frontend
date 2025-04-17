@@ -1,0 +1,145 @@
+
+:root {
+    --sidebar-bg-color: #FFF9F1; 
+    --text-color: #3F2B12; 
+    --secondary-text-color: #73552F; 
+    --highlight-color: #1D2415; 
+    --date-color: #1D2415; 
+    --event-title-color: #73552F; 
+    --event-format-color: #1D2415;
+    --icon-filter: none; 
+}
+
+
+.dark {
+    --sidebar-bg-color: #4B3F31; 
+    --text-color: #F0E8D1; 
+    --secondary-text-color: #B9AA89; 
+    --highlight-color: #B9AA89; 
+    --date-color: #F0E8D1; 
+    --event-title-color: #B9AA89; 
+    --event-format-color: #B9AA89; 
+    --icon-filter: none; 
+}
+
+aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+    width: 400px;
+    height: 2116px;
+}
+
+.interesting {
+    background-color: var(--sidebar-bg-color);
+    padding: 20px;
+}
+
+.interesting h3 {
+    font-size: 36px;
+    margin-left: 26px;
+    margin-top: 15px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.interest-item {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    margin-left: 26px;
+    color: var(--secondary-text-color);
+}
+
+.reaction-count {
+    color: var(--highlight-color);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.reaction-count span {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.icon4 img,
+.icon5 img {
+    width: 52px;
+    height: 43px;
+    object-fit: contain;
+    filter: var(--icon-filter);
+}
+
+.icon5 img {
+    width: 55px;
+    height: 55px;
+    margin-left: 45px;
+}
+
+.events {
+    background-color: var(--sidebar-bg-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.events h3 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.event-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.event-item img {
+    width: 350px;
+    height: 200px;
+    object-fit: cover;
+    align-self: center;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.span {
+    color: var(--highlight-color);
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.p11 {
+    color: var(--secondary-text-color);
+    font-size: 28px;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-top: auto;
+}
+
+.p12 {
+    color: var(--event-format-color);
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-top: auto;
+}
