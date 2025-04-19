@@ -1,0 +1,14 @@
+.chessboard_container {
+    display: flex;
+    gap: 30px;
+}
+
+.moves {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.moves_navigation {
+    display: flex;
+    gap: 100px;
+}
