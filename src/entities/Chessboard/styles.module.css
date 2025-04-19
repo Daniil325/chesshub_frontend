@@ -1,3 +1,8 @@
+.move_list {
+    width: 200px;
+    flex-direction: column;
+}
+
 .chessboard_container {
     display: flex;
     gap: 30px;
@@ -6,6 +11,7 @@
 .moves {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    flex: 1 1 auto;
 }
 
 .moves_navigation {

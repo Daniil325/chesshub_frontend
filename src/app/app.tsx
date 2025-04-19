@@ -3,8 +3,9 @@ import "./App.css";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
-import Table from "@editorjs/Table"
+import Table from "@editorjs/Table";
 import { BoardTool } from "@/entities/Chessboard/BoardTool";
+import { Header as MainHeader } from "@/components/organisms/Header";
 
 const DEFAULT_INITIAL_DATA = {
     time: new Date().getTime(),
@@ -58,6 +59,7 @@ const EditorComponent = () => {
 
     return (
         <>
+        
             <div id="editorjs"></div>
         </>
     );
@@ -66,7 +68,13 @@ const EditorComponent = () => {
 export function App() {
     return (
         <>
-            <EditorComponent />
+            <MainHeader />
+            <div className="main">
+                 <h2>Создайте свою статью!</h2>
+                <div className="content">
+                    <EditorComponent />
+                </div>
+            </div>
         </>
     );
 }

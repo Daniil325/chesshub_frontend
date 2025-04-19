@@ -31,3 +31,12 @@ body {
   width: 200px;
 }
 
+.main {
+  gap: 20px;
+  padding: 40px;
+  margin: auto;
+  max-width: 1500px;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}

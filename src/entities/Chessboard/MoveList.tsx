@@ -12,7 +12,7 @@ export const MoveList = () => {
     } = useContext(ChessboardContext);
 
     return (
-        <div className="move_list">
+        <div className={styles.move_list}>
             <div className={styles.moves}>
                 {moveLog.length > 0 ? (
                     moveLog.map((move, index) => (

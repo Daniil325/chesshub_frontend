@@ -1,20 +1,19 @@
 import React from "react";
-import {Sidebar} from "@/components/SidebarColorchange/Sidebar";
-import {Article} from "@/components/ArticleColorchange/Article";
-import {ArticlePOST} from "@/components/ArticlePOSTColorchange/ArticlePOST";
-import { ThemeProvider, useTheme } from "@/components/ThemeContext";
-import {Header} from "@/components/HeaderColorchange/Header";
-import {CommentSection} from "@/components/CommentSectionColorchange/CommentSection";
-import {AuthorInfo} from "@/components/AuthorInfoColorchange/AuthorInfo";
-import {ProfileInfo} from "@/components/ProfileInfoColorchange/ProfileInfo";
-import {Tabs} from "@/components/TabsColorchange/Tabs";
-import {ProfileInfo1} from "@/components/SubscriptionsColorchange/Subscriptions";
 
-import {SidebarUser_page} from "@/components/SidebarUser_pageColorchange/SidebarUser_page";
 import './index.css';
+import { ThemeProvider, useTheme } from "@/components/organisms/ThemeContext";
+import { Header } from "@/components/organisms/Header";
+import AuthorInfo from "@/components/organisms/AuthorInfo/AuthorInfo";
+import Tabs from "@/components/organisms/Tabs/Tabs";
+import ProfileInfo1 from "@/components/organisms/Subscriptions/Subscriptions";
+import ProfileInfo from "@/components/organisms/Subscribers/Subscribers";
+import ArticlePOST from "@/components/organisms/ArticlePost/ArticlePost";
+import CommentSection from "@/components/organisms/CommentSection/CommentSection";
+import Article from "@/components/organisms/Article/Article";
+import SidebarUser_page from "@/components/organisms/SidebarUserPage/SidebarUser_page";
 
 
-const App: React.FC = () => {
+const AApp: React.FC = () => {
     return (
         <ThemeProvider>
             <ThemedApp />
@@ -48,4 +47,4 @@ const ThemedApp: React.FC = () => {
     );
 };
 
-export default App;
+export default AApp;
