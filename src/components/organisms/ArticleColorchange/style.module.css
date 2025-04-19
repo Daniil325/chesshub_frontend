@@ -1,0 +1,129 @@
+:root {
+    --article-bg-color: #fff9f1; 
+    --text-color: #3f2b12; 
+    --text-color-stat:#1D2415;
+    --text-color-title:#73552F ;
+    --author-info-color: #73552f; 
+    --reaction-icon-filter: none; 
+}
+
+
+.dark {
+    --article-bg-color: #4B3F31 ; 
+    --text-color: #B9AA89 ; 
+    --text-color-stat:#F0E8D1 ;
+    --text-color-title:#F0E8D1 ; 
+    --author-info-color: #F0E8D1 ; 
+    --reaction-icon-filter: none; 
+}
+
+
+
+
+.article {
+    background-color: var(--article-bg-color);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.article_container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.author_info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.author_profile_logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: var(--reaction-icon-filter);
+
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nickname {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--author-info-color);
+}
+
+.pub_date {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--author-info-color);
+}
+
+.article_preview {
+    display: flex;
+    align-items: center;
+    object-fit: contain;
+    max-width: 900px;
+    margin: auto;
+}
+
+.article_title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-color-title);
+}
+
+.article_text {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+.reactions {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.article_stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 32px;
+    font-weight: 700;
+    color: var( --text-color-stat);
+}
+
+.article_stat:first-child {
+    margin-right: auto;
+}
+
+.article_stat:nth-child(2n) {
+    margin-right: 20px;
+}
+
+.reactions img {
+    object-fit: contain;
+}
+
+.icon_view {
+    width: 67px;
+    height: 53px;
+    object-fit: contain;
+}
+
+.icon_reaction {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.icon_view,
+.icon_reaction {
+  
+    filter: var(--reaction-icon-filter);
+}
