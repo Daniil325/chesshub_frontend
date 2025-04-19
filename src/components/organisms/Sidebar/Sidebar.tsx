@@ -1,56 +1,74 @@
 import React from "react";
 import styles from "./style.module.css";
+import { useTheme } from "../ThemeContext";
 
 const Sidebar: React.FC = () => {
+    const { theme } = useTheme();
+
     return (
-        <aside className={styles.sidebar}>
-            
-            <div className={styles.info}>
-                <h3>Информация</h3>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Статус</span>
-                    <span className={styles.value1}>Статус</span>
+        <aside className={`${styles.aside} ${theme === 'dark' ? styles.dark : ''}`}>
+            <div className={styles.interesting}>
+                <h3>Интересное</h3>
+                <div className={styles["interest-item"]}>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+                    <div className={styles["reaction-count"]}>
+                        <span className={styles.icon4}>
+                            <img src="/img/глаза_интерес.svg" alt="Icon 4" /> 999
+                        </span>
+                        <span className={styles.icon5}>
+                            <img src="/img/комментарии.svg" alt="Icon 5" /> 999
+                        </span>
+                    </div>
                 </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Страна</span>
-                    <span className={styles.value2}>Россия</span>
+                <div className={styles["interest-item"]}>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+                    <div className={styles["reaction-count"]}>
+                        <span className={styles.icon4}>
+                            <img src="/img/глаза_интерес.svg" alt="Icon 4" /> 999
+                        </span>
+                        <span className={styles.icon5}>
+                            <img src="/img/комментарии.svg" alt="Icon 5" /> 999
+                        </span>
+                    </div>
                 </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Дата создания</span>
-                    <span className={styles.value3}>11.09.2001</span>
-                </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Рейтинг</span>
-                    <span className={styles.value4}>999</span>
+                <div className={styles["interest-item"]}>
+                    <p>Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+                    <div className={styles["reaction-count"]}>
+                        <span className={styles.icon4}>
+                            <img src="/img/глаза_интерес.svg" alt="Icon 4" /> 999
+                        </span>
+                        <span className={styles.icon5}>
+                            <img src="/img/комментарии.svg" alt="Icon 5" /> 999
+                        </span>
+                    </div>
                 </div>
             </div>
 
-           
-            <div className={styles.lichess_info}>
-                <h3>Информация с lichess</h3>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Ник</span>
-                    <span className={styles.value5}>@Autor_playing</span>
+            <div className={styles.events}>
+                <h3>Ближайшие события</h3>
+                <div className={styles["event-item"]}>
+                    <img src="/img/image 2.png" alt="Event Image" />
+                    <div className={styles["event-details"]}>
+                        <span className={styles.span}>11.09.2001</span>
+                        <p className={styles.p11}>Сидим, не рыпаемся.</p>
+                        <p className={styles.p12}>Онлайн</p>
+                    </div>
                 </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>ULTRABULLET</span>
-                    <span className={styles.value6}>999</span>
+                <div className={styles["event-item"]}>
+                    <img src="/img/image 2.png" alt="Event Image" />
+                    <div className={styles["event-details"]}>
+                        <span className={styles.span}>11.09.2001</span>
+                        <p className={styles.p11}>Сидим, не рыпаемся.</p>
+                        <p className={styles.p12}>Онлайн</p>
+                    </div>
                 </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Пуля</span>
-                    <span className={styles.value7}>999</span>
-                </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Блиц</span>
-                    <span className={styles.value8}>999</span>
-                </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Рапид</span>
-                    <span className={styles.value9}>999</span>
-                </div>
-                <div className={styles.info_item}>
-                    <span className={styles.label}>Классика</span>
-                    <span className={styles.value10}>999</span>
+                <div className={styles["event-item"]}>
+                    <img src="/img/image 2.png" alt="Event Image" />
+                    <div className={styles["event-details"]}>
+                        <span className={styles.span}>11.09.2001</span>
+                        <p className={styles.p11}>Сидим, не рыпаемся.</p>
+                        <p className={styles.p12}>Онлайн</p>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -58,4 +76,3 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
-

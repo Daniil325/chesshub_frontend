@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./style.module.css";
+import { useTheme } from "../ThemeContext";
 
-const ProfileInfo: React.FC = () => {
+const ProfileInfo1: React.FC = () => {
+  const { theme } = useTheme();
     return (
-        <div className={styles.profile_info}>
+        <div className={`${styles.profile_info} ${theme === 'dark' ? styles.dark : ''}`}>
             <div className={styles.head_sub}>
                 <span>Имя</span>
                 <span>Рейтинг</span>
@@ -58,4 +60,4 @@ const ProfileInfo: React.FC = () => {
     );
 };
 
-export default ProfileInfo;
+export default ProfileInfo1;

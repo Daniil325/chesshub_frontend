@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./style.module.css";
+import { useTheme } from "../ThemeContext";
 
 const AuthorInfo: React.FC = () => {
+    const { theme } = useTheme();
     return (
         
-        <div className={styles.author_info}>
+        <div className={`${styles.author_info} ${theme === 'dark' ? styles.dark : ''}`}>
             <div className={styles.avatar}>
                 <img src="/img/ава_конь_тёмный_фон.svg" alt="Авторский аватар" />
             </div>

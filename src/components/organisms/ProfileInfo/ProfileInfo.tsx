@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./style.module.css";
-
+import { useTheme } from "../ThemeContext";
 const ProfileInfo: React.FC = () => {
+    const { theme } = useTheme();
     return (
-        <div className={styles.profile_info}>
+        <div className={`${styles.profile_info} ${theme === 'dark' ? styles.dark : ''}`}>
             <div className={styles.section}>
                 <h3>О себе</h3>
                 <p>Я такой крутой, блин, класс.</p>

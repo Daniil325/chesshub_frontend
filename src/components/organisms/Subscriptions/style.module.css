@@ -1,64 +1,91 @@
+
+:root {
+    --profile-bg-color: #FFF9F1; 
+    --head-sub-bg-color: #D6C1AD; 
+    --text-color: #4D3417; 
+    --secondary-text-color: #3F2B12; 
+    --highlight-green: #9FB162; 
+    --highlight-red: #FF3C3C; 
+    --highlight-grey: #73552F; 
+}
+
+
+.dark {
+    --profile-bg-color: #4B3F31; 
+    --head-sub-bg-color: #5A4E3F;
+    --text-color: #F0E8D1;
+    --secondary-text-color: #B9AA89; 
+    --highlight-green: #A7C582;
+    --highlight-red: #FF6B6B;
+    --highlight-grey: #B9AA89;
+}
+
 .profile_info {
-    background-color: #FFF9F1;
+    background-color: var(--profile-bg-color); 
+    transition: background-color 0.3s ease; 
 }
 
 .head_sub {
     display: flex;
     justify-content: space-between;
     padding: 13px 25px;
-    align-items: center; 
-    background-color: #D6C1AD;
+    align-items: center;
+    background-color: var(--head-sub-bg-color); 
+    transition: background-color 0.3s ease; 
 }
 
 .head_sub span {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     font-weight: 500;
-    color: #4D3417; 
+    color: var(--text-color); 
+    transition: color 0.3s ease;
 }
-
 
 .section {
-    margin-bottom: 60px; 
-
+    margin-bottom: 60px;
 }
+
 .sub_info {
-    
     display: flex;
     align-items: center;
     margin: 25px 30px;
 }
 
 .avatar img {
-    width: 60px ;
-    height: 60px ;
+    width: 60px;
+    height: 60px;
 }
 
-.nicname_sub span{
+.nicname_sub span {
     margin-left: 20px;
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     font-weight: 700;
-    color: #3F2B12; 
+    color: var(--secondary-text-color); 
+    transition: color 0.3s ease; 
 }
 
-.rating_green span{
+.rating_green span {
     margin-left: 500px;
     font-size: 30px;
     font-weight: 800;
-    color: #9FB162;
+    color: var(--highlight-green); 
+    transition: color 0.3s ease; 
 }
 
-.rating_red span{
+.rating_red span {
     margin-left: 500px;
     font-size: 30px;
     font-weight: 800;
-    color: #FF3C3C;
+    color: var(--highlight-red);
+    transition: color 0.3s ease; 
 }
 
-.rating_grey span{
+.rating_grey span {
     margin-left: 500px;
     font-size: 30px;
     font-weight: 800;
-    color: #73552F;
+    color: var(--highlight-grey); 
+    transition: color 0.3s ease; 
 }
