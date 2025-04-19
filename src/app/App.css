@@ -5,36 +5,9 @@ body {
     background-color: #d6c1ad;
 }
 
-.pagination {
-    width: 1250px;
-    height: 93px;
-    gap: 10px;
-    background-color: #4d3417;
-    color: #fff9f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto auto;
-    border-radius: 30px;
-
-    margin-left: 305px;
-    margin-top: 45px;
-    margin-bottom: 100px;
-}
-
-.pagination button {
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff9f1;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.pagination span {
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff9f1;
+.div {
+  max-width: 550px;
+  flex: 1 1 auto;
 }
 
 .editor_container {
