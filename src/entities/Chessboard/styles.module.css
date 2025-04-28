@@ -4,7 +4,6 @@
 }
 
 .chessboard_container {
-    display: flex;
     gap: 30px;
 }
 
@@ -17,4 +16,13 @@
 .moves_navigation {
     display: flex;
     gap: 100px;
+}
+
+.pieces_container {
+    display: flex;
+
+}
+
+.d_none {
+    display: none;
 }
