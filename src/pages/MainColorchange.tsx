@@ -7,7 +7,7 @@ import AuthorInfo from "@/components/organisms/AuthorInfo/AuthorInfo";
 import Tabs from "@/components/organisms/Tabs/Tabs";
 import ProfileInfo1 from "@/components/organisms/Subscriptions/Subscriptions";
 import ProfileInfo from "@/components/organisms/Subscribers/Subscribers";
-import ArticlePOST from "@/components/organisms/ArticlePost/ArticlePost";
+import ArticlePOST from "@/components/organisms/ArticlePOST/ArticlePost";
 import CommentSection from "@/components/organisms/CommentSection/CommentSection";
 import Article from "@/components/organisms/Article/Article";
 import SidebarUser_page from "@/components/organisms/SidebarUserPage/SidebarUser_page";
