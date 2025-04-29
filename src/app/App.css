@@ -42,9 +42,14 @@ body {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .d-block {
-  display: block;
+  display: block !important;
+  height: 500px;
+}
+
+.ce-block__content, .ce-toolbar__content {
+  max-width: 800px;
 }

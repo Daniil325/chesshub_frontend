@@ -43,10 +43,10 @@ export const ManualEditor = () => {
     ];
 
     return (
-        <div>
+        <div className={isHidden ? "d-none" : "d-block"}>
             <p onClick={changeHidden}>Закрыть</p>
             <ChessboardDnDProvider>
-                <div className={isHidden ? "d-none" : "d-block"}>
+                <div>
                     <div
                         style={{
                             display: "flex",
@@ -61,6 +61,8 @@ export const ManualEditor = () => {
                         ))}
                     </div>
                     <Chessboard
+                        id="ManualBoardEditor"
+                        key="123" 
                         boardOrientation={boardOrientation}
                         position={game.fen()}
                         onSparePieceDrop={handleSparePieceDrop}
@@ -78,6 +80,7 @@ export const ManualEditor = () => {
                                 key={piece}
                                 piece={piece as Piece}
                                 width={400 / 8}
+                                
                             />
                         ))}
                     </div>

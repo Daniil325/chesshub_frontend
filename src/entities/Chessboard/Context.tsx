@@ -199,7 +199,10 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         handlePieceDropOffBoard,
         changeHidden,
         setStyle,
-        onClearClick
+        setMoveLog,
+        setIsHidden,
+        onClearClick,
+        setCurrentIndex
     };
 
     return (
