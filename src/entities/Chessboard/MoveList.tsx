@@ -19,9 +19,9 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
     } = useContext(ChessboardContext);
 
     useEffect(() => {
-        console.log(Object.values(defaultMoves))
-        setMoveLog(Object.values(defaultMoves));
-    }, [defaultMoves]);
+        const a = Object.values(defaultMoves)
+        setMoveLog(a);
+    }, []);
 
     console.log(moveLog)
 
@@ -55,7 +55,7 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
             <div className={styles.menu_container}>
                 <img
                     className={styles.menu_icon}
-                    src="public/menu.png"
+                    src="/public/menu.png"
                     alt=""
                     onClick={changeMenuVisible}
                 />
@@ -69,7 +69,7 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
                     >
                         <img
                             className={styles.menu_item_icon}
-                            src="public/exchange.png"
+                            src="/public/exchange.png"
                             alt=""
                         />{" "}
                         Перевернуть доску
@@ -77,7 +77,7 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
                     <p className={styles.menu_item} onClick={onToolOpenClick}>
                         <img
                             className={styles.menu_item_icon}
-                            src="public/pen.png"
+                            src="/public/pen.png"
                             alt=""
                         />{" "}
                         Редактор доски

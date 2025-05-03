@@ -25,10 +25,10 @@ const DynamicIcon: React.FC<{
 export const ArticlePOST: React.FC = ({id}) => {
     const { theme } = useTheme();
     const { data } = articleApi.useGetArticleQuery(id);
+    console.log(data)
 
     if (data) {
         const item = data["item"]
-        console.log(item)
 
         return (
             <article

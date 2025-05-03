@@ -85,6 +85,7 @@
 .menu_icon,
 .menu_item_icon {
     width: 30px;
+    height: 30px;
 }
 
 .menu_items {
