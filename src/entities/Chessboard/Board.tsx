@@ -5,7 +5,6 @@ import {
     SparePiece,
 } from "react-chessboard";
 import { ChessboardContext } from "./Context";
-import { MoveList } from "./MoveList";
 import { Piece } from "chess.js";
 import styles from "./styles.module.css";
 

@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChessboardContext } from "./Context";
 import styles from "./styles.module.css";
 
-export const MoveList = () => {
+export const MoveList = ({handleChange, defaultMoves = []}) => {
     const {
         moveLog,
         currentIndex,
@@ -15,7 +15,19 @@ export const MoveList = () => {
         setIsHidden,
         isHidden,
         setCurrentIndex,
+
     } = useContext(ChessboardContext);
+
+    useEffect(() => {
+        console.log(Object.values(defaultMoves))
+        setMoveLog(Object.values(defaultMoves));
+    }, [defaultMoves]);
+
+    console.log(moveLog)
+
+    useEffect(() => {
+        handleChange(moveLog);
+    }, [moveLog]);
 
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
@@ -25,6 +37,7 @@ export const MoveList = () => {
 
     const onToolOpenClick = () => {
         setMoveLog([]);
+        handleChange([]);
         setIsHidden(!isHidden);
         setCurrentIndex(0);
     };

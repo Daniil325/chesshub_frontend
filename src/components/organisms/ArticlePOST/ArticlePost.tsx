@@ -1,114 +1,107 @@
 import styles from "./style.module.css";
 import React from "react";
 import { useTheme } from "../ThemeContext";
+import { articleApi } from "@/store/article";
+import { ChessboardView } from "@/entities/Chessboard/Chessboard";
 
-const DynamicIcon: React.FC<{ 
-  lightSrc: string; 
-  darkSrc: string; 
-  alt: string; 
-  className?: string 
+
+const DynamicIcon: React.FC<{
+    lightSrc: string;
+    darkSrc: string;
+    alt: string;
+    className?: string;
 }> = ({ lightSrc, darkSrc, alt, className }) => {
-  const { theme } = useTheme();
-  
-  return (
-    <img 
-      src={theme === 'dark' ? darkSrc : lightSrc}
-      alt={alt}
-      className={className}
-      
-    />
-  );
+    const { theme } = useTheme();
+
+    return (
+        <img
+            src={theme === "dark" ? darkSrc : lightSrc}
+            alt={alt}
+            className={className}
+        />
+    );
 };
 
-export const ArticlePOST: React.FC = () => {
-  const { theme } = useTheme();
-  
-  return (
-    <article className={`${styles.article} ${theme === 'dark' ? styles.dark : ''}`}>
-      
-      <div className={styles.author_info}>
-      <img src="/img/ава_конь_тёмный_фон.svg" alt="Author Avatar" className={styles.avatar} />
-        <span className={styles.nickname}>author nickname</span>
-        <span className={styles.date}>11.09.2001</span>
-      </div>
+export const ArticlePOST: React.FC = ({id}) => {
+    const { theme } = useTheme();
+    const { data } = articleApi.useGetArticleQuery(id);
 
-      
-      <h2 className={styles.title}>Какой-то крутой заголовок. Прям очень круто.</h2>
+    if (data) {
+        const item = data["item"]
+        console.log(item)
 
-      
-      <span className={styles.views}>
-      <img src="/img/глаза.svg" alt="Views Icon" className={styles.icon} />
-        999
-      </span>
+        return (
+            <article
+                className={`${styles.article} ${
+                    theme === "dark" ? styles.dark : ""
+                }`}
+            >
+                <div className={styles.author_info}>
+                    <img
+                        src="/img/ава_конь_тёмный_фон.svg"
+                        alt="Author Avatar"
+                        className={styles.avatar}
+                    />
+                    <span className={styles.nickname}>author nickname</span>
+                    <span className={styles.date}>11.09.2001</span>
+                </div>
+                
+                <h2 className={styles.title}>
+                    {item["title"]}
+                </h2>
 
-      
-      <p className={styles.text}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-        into electronic typesetting.
-      </p>
+                {item["content"]["blocks"].map(el => {
+                    if (el["type"] == "board") {
+                        console.log(el)
+                        return <ChessboardView defaultMoves={el["data"]}/>
+                    }
+                    if (el["type"] == "list") {
+                        return (
+                            <ul className={styles.list}>
+                                <li>{el["data"]["items"].map(it => it.content)}</li>
+                            </ul>
+                        )
+                    }
+                })}
 
-      
-      <img 
-        src="/img/image 1.png" 
-        alt="Chess Image" 
-        className={styles.Chessimage} 
-       
-      />
-
-      
-      <p className={styles.subtitle}>Himenaeos vitas primis etian :</p>
-
-      
-      <ul className={styles.list}>
-        <li>Purus egestas in lacinia pellentesque sed. Euismod suspendisse varius magna placerat massa mi sapien vestibulum.</li>
-        <li>Primis ultrices urna leo gravida inceptos. Consequat nibh curae molestie ligula interdum finibus elit.</li>
-        <li>Accumsan dui nunc egestas sem, eget felis a. Sollicitudin eu euismod nulla aliquam tristique.</li>
-        <li>Tincidunt senectus litora primis, arcu inceptos tincidunt gravida.</li>
-      </ul>
-
-      
-      <p className={styles.text}>
-        Ut orci ridiculus venenatis habitasse; arcu vestibulum quis nulla? Ante tellus curabitur pretium nulla
-        sodales fames fermentum. Mattis vestibulum sem finibus elit leo ex porttitor. Euismod fermentum nec
-        nostra, nibh vivamus diam blandit varius. Dictumst purus tempus per cras, est velit habitant. Est
-        fringilla platea est mus dapibus urna. Nam ut consequat ultricies mollis dignissim duis nec senectus
-        senectus. Rhoncus eget aenean donec praesent lorem amet fusce a? Vulputate suscipit parturient
-        suspendisse faucibus platea vehicula porttitor. Praesent leo morbi varius, senectus convallis facilisi
-        nisi duis pulvinar. Ridiculus etiam ultrices non facilisi leo; non finibus porta.
-      </p>
-
-      
-      <div className={styles.reactions}>
-        <span className={styles.reaction}>
-        <img src="/img/layer1.svg" alt="Reaction Icon" className={styles.layer1} />
-        </span>
-        <span className={styles.reaction}>
-        <img src="/img/комм_пост.svg" alt="Comment Icon" className={styles.komm_post} />
-          999
-        </span>
-        <span className={styles.reaction}>
-          <DynamicIcon
-            lightSrc="/img/иконка_зелён_светлая.svg"
-            darkSrc="/img/иконка_зелён_тёмная.svg"
-            alt="Positive Reaction"
-            className={styles.icongreen}
-          />
-          999
-        </span>
-        <span className={styles.reaction}>
-          <DynamicIcon
-            lightSrc="/img/иконка_красн_светлая.svg"
-            darkSrc="/img/иконка_красн_тёмная.svg"
-            alt="Negative Reaction"
-            className={styles.iconred}
-          />
-          999
-        </span>
-      </div>
-    </article>
-  );
+                <div className={styles.reactions}>
+                    <span className={styles.reaction}>
+                        <img
+                            src="/img/layer1.svg"
+                            alt="Reaction Icon"
+                            className={styles.layer1}
+                        />
+                    </span>
+                    <span className={styles.reaction}>
+                        <img
+                            src="/img/комм_пост.svg"
+                            alt="Comment Icon"
+                            className={styles.komm_post}
+                        />
+                        999
+                    </span>
+                    <span className={styles.reaction}>
+                        <DynamicIcon
+                            lightSrc="/img/иконка_зелён_светлая.svg"
+                            darkSrc="/img/иконка_зелён_тёмная.svg"
+                            alt="Positive Reaction"
+                            className={styles.icongreen}
+                        />
+                        999
+                    </span>
+                    <span className={styles.reaction}>
+                        <DynamicIcon
+                            lightSrc="/img/иконка_красн_светлая.svg"
+                            darkSrc="/img/иконка_красн_тёмная.svg"
+                            alt="Negative Reaction"
+                            className={styles.iconred}
+                        />
+                        999
+                    </span>
+                </div>
+            </article>
+        );
+    }
 };
 
 export default ArticlePOST;

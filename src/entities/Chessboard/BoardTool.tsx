@@ -1,41 +1,102 @@
 import ReactDOM from "react-dom/client";
 import { Chessboard } from "./Chessboard";
+import { ChessboardContext } from "./Context";
+import { Component, useContext } from "react";
+import type { API, BlockTool, ToolConfig } from '@editorjs/editorjs'
+import React, { createElement } from 'react'
 
-export class BoardTool {
-    static get toolbox() {
-        return {
-            title: "Image",
-            icon: '<svg width="17" height="15" viewBox="0 0 336 276" xmlns="http://www.w3.org/2000/svg"><path d="M291 150V79c0-19-15-34-34-34H79c-19 0-34 15-34 34v42l67-44 81 72 56-29 42 30zm0 52l-43-30-56 30-81-67-66 39v23c0 19 15 34 34 34h178c17 0 31-13 34-29zM79 0h178c44 0 79 35 79 79v118c0 44-35 79-79 79H79c-44 0-79-35-79-79V79C0 35 35 0 79 0z"/></svg>',
-        };
+interface CustomToolOptions<TData extends Record<string, any>, TConfig extends Record<string, any>, TOpts extends Record<string, any>> {
+    data: TData
+    config: TConfig
+    api: API
+    readOnly: boolean
+    component: React.ComponentType<{ onDataChange: (newData: TData) => void; readOnly: boolean; data: TData; opts: TOpts }>
+    toolbox: ToolConfig
+    opts?: TOpts
+}
+
+export class CustomTool<TData extends Record<string, any>, TConfig extends Record<string, any>, TOpts extends Record<string, any>> implements BlockTool {
+    private api: API
+    private readonly readOnly: boolean
+    private data: TData
+    private config: TConfig
+    private component: React.ComponentType<{ onDataChange: (newData: TData) => void; readOnly: boolean; data: TData; options?: TOpts }>
+    private toolbox: ToolConfig
+
+    private readonly CSS = {
+        wrapper: 'custom-tool',
     }
 
-    constructor() {
-        this.nodes = {
-            holder: null,
-        };
-
-        this.data = [];
+    private nodes = {
+        holder: null as HTMLElement | null,
     }
 
-    render() {
-        const rootNode = document.createElement("div");
-        this.nodes.holder = rootNode;
+    constructor(options: CustomToolOptions<TData, TConfig, TOpts>) {
+        const { data, config, api, readOnly, component, toolbox } = options
+        this.api = api
+        this.readOnly = readOnly
+        this.data = data
+        this.config = config
+        this.component = component as any
+        this.toolbox = toolbox
+    }
+
+    static get isReadOnlySupported(): boolean {
+        return true
+    }
+
+    render(): HTMLElement {
+        const rootNode = document.createElement('div')
+        rootNode.setAttribute('class', this.CSS.wrapper)
         const root = ReactDOM.createRoot(rootNode);
+        this.nodes.holder = rootNode
 
-        const onDataChange = (newData: object[]) => {
+        const onDataChange = (newData: TData) => {
             this.data = {
                 ...newData,
-            };
-        };
+            }
+        }
+            
+        root.render(<this.component onDataChange={onDataChange} readOnly={this.readOnly} data={this.data} />)
 
-        root.render(<Chessboard />);
-
-        return this.nodes.holder;
+        return this.nodes.holder
     }
 
-    save(blockContent) {
-        return {
-            moves: this.data,
-        };
+    save(): TData {
+        return this.data
+    }
+
+    static createTool<TData extends Record<string, any>, TConfig extends Record<string, any>, TOpts extends Record<string, any>>(
+        component: React.ComponentType<{ onDataChange: (newData: TData) => void; readOnly: boolean; data: TData; opts: TOpts }>,
+        toolbox: ToolConfig,
+        opts?: TOpts,
+    ): new (options: CustomToolOptions<TData, TConfig, TOpts>) => CustomTool<TData, TConfig, TOpts> {
+        return class extends CustomTool<TData, TConfig, TOpts> {
+            constructor(options: CustomToolOptions<TData, TConfig, TOpts>) {
+                super({
+                    ...options,
+                    component: (props: any) => createElement(component, { ...props, options: opts }),
+                    toolbox,
+                    data: {
+                        moves: [],
+                        ...options.data,
+                    },
+                })
+            }
+
+            static get toolbox() {
+                return toolbox
+            }
+        }
     }
 }
+
+
+export const TitleTool = CustomTool.createTool(
+    // ⬇️ Here is the component that will be used as the custom "tool" / "block" inside EditorJS.
+    Chessboard,
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10l3-1v10M3 5v7m0 0v7m0-7h8m0-7v7m0 0v7"/></svg>',
+        title: 'Board',
+    },
+)

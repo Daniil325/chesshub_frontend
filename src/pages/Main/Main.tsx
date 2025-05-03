@@ -1,19 +1,33 @@
-import { Article } from "@/components/organisms/Article";
 import { Header } from "@/components/organisms/Header";
-import { Sidebar } from "@/components/organisms/Sidebar";
 import styles from "./style.module.css";
+import Article from "@/components/organisms/Article/Article";
+import { articleApi } from "@/store/article";
 
 export function MainPage() {
+    const { data, isLoading, isError, isFetching } =
+        articleApi.useGetArticlesQuery();
+
+    if (isLoading) {
+        return <h1>Loading</h1>;
+    }
+
     return (
         <>
             <Header />
             <main className={styles.main}>
                 <div className={styles.main_container}>
                     <div>
-                        <Article />
-                        <Article />
+                        {data["items"].map((el) => {
+                            return (
+                                <Article
+                                    id={el["id"]}
+                                    img={el["preview"]}
+                                    title={el["title"]}
+                                    pubDate={el["pubDate"]}
+                                />
+                            );
+                        })}
                     </div>
-                    <Sidebar />
                 </div>
             </main>
         </>

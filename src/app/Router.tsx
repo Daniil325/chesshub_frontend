@@ -1,3 +1,4 @@
+import ArticlePOST from "@/components/organisms/ArticlePost/ArticlePost";
 import { MainPage } from "@/pages/Main";
 import Post from "@/pages/Post";
 import UserPage from "@/pages/UserPage";
@@ -8,6 +9,7 @@ export const AppRouter = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/"><MainPage /></Route>
+                <Route path="/article/:id"><ArticlePOST /></Route>
                 <Route path="/post"><Post /></Route>
                 <Route path="/user_profile"><UserPage /></Route>
                 <Route path="/user_posts"><UserPage /></Route>

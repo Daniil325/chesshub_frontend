@@ -1,0 +1,22 @@
+.course_list_item__container {
+    display: flex;
+    gap: 50px;
+    border: 1px solid var(--header-bg-color);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.course_list_item__image {
+    width: 100px;
+    height: 100px;
+}
+
+.course_list_item__title {
+    font-size: 25px;
+    color: var(--header-bg-color);
+    font-weight: 700;
+}
+
+.styles.course_list_item__price {
+    font-weight: 500;
+}

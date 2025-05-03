@@ -93,7 +93,6 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         const moves = pgnFormat(moveLog.slice(0, a));
         game.loadPgn(moves);
         setFenPosition(game.fen());
-        // setGame(game);
     };
 
     const moveNextClick = () => {
@@ -102,7 +101,6 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         const moves = pgnFormat(moveLog.slice(0, a));
         game.loadPgn(moves);
         setFenPosition(game.fen());
-        // setGame(game);
     };
 
     const onClearClick = () => {

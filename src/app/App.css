@@ -53,3 +53,16 @@ body {
 .ce-block__content, .ce-toolbar__content {
   max-width: 800px;
 }
+
+.main {
+  
+  margin: auto;
+  margin-top: 20px;
+  max-width: 1500px;
+  background-color: #ecdfce;
+}
+
+.main_container {
+  gap: 20px;
+  padding: 20px;
+}
