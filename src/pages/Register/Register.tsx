@@ -1,6 +1,5 @@
 import { Header } from "@/components/organisms/Header";
 import { authUser, userApi } from "@/store/user";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Card } from "primereact/card";
@@ -22,7 +21,6 @@ export const Register = () => {
         watch,
         formState: { errors },
     } = useForm();
-    const [data, setData] = useState("");
 
     const [addProduct, { isError }] = userApi.useRegisterUserMutation();
 

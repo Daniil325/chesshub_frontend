@@ -9,11 +9,10 @@ import { useLoginState } from "@/hooks/useLoginState";
 export const Header: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
 
-    const { username, role, id } = useSelector((state) => {
+    const { username, role } = useSelector((state) => {
         return {
             username: state.loginUser.username,
             role: state.loginUser.role,
-            id: state.loginUser.id,
         };
     });
 
@@ -31,7 +30,8 @@ export const Header: React.FC = () => {
                     <h3>Добро пожаловать {username}</h3>
                 ) : (
                     <h3>
-                        <Link to="/register">Зарегистрируйтесь</Link>
+                        <Link to="/register">Зарегистрируйтесь </Link>
+                         или <Link to="/login">Войдите</Link>
                     </h3>
                 )}
 

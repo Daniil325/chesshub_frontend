@@ -5,6 +5,7 @@ import List from "@editorjs/list";
 import Table from "@editorjs/Table";
 import { TitleTool } from "@/entities/Chessboard/BoardTool";
 import { articleApi } from "@/store/article";
+import { Header as MainHeader } from "@/components/organisms/Header";
 
 const DEFAULT_INITIAL_DATA = {
     time: new Date().getTime(),
@@ -78,7 +79,11 @@ const EditorComponent = () => {
 export const ArticleCreate = () => {
     return (
         <>
-            <EditorComponent />
+            <MainHeader />
+            <main className="main">
+                <EditorComponent />
+            </main>
+            
         </>
     );
 };

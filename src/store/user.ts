@@ -12,6 +12,16 @@ export const userApi = createApi({
                 body,
             }),
         }),
+        loginUser: build.mutation({
+            query: (body) => ({
+                url: "user/login",
+                method: "POST",
+                body,
+            })
+        }),
+        getProfile: build.query({
+            query: (username) => ({ url: `user/profile/${username}`, method: "GET" }),
+        })
     }),
 });
 
@@ -29,9 +39,8 @@ export function userReducer(state = userState, action) {
             return {
                 ...state,
                 isLogin: true,
-                username: action.payload,
-                role: action.payload,
-                id: action.payload
+                username: action.payload.username,
+                role: action.payload.role,
             };
         case "LOGOUT":
             return { ...userState };

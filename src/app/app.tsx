@@ -13,6 +13,8 @@ import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 import { CoursesList } from "@/pages/Courses/CoursesList";
+import { Login } from "@/pages/Login/Login";
+import { CreateCourse } from "@/pages/CourseCreate/CourseCreate";
 
 
 export function App() {
@@ -27,10 +29,12 @@ export function App() {
                         element={<ArticleDetail />}
                     ></Route>
                     <Route path="/post" element={<Post />}></Route>
-                    <Route path="/user_profile" element={<UserPage />}></Route>
+                    <Route path="/profile" element={<UserPage />}></Route>
                     <Route path="/user_posts" element={<UserPage />}></Route>
                     <Route path="/register" element={<Register />}></Route>
+                    <Route path="/login" element={<Login />}></Route>
                     <Route path="/course" element={<CoursesList />}></Route>
+                    <Route path="/create_course" element={<CreateCourse />}></Route>
                 </Routes>
             </BrowserRouter>
         </Provider>

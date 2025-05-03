@@ -2,7 +2,13 @@ import React from "react";
 import styles from "./style.module.css";
 import { useTheme } from "../ThemeContext";
 
-const AuthorInfo: React.FC = () => {
+type Props = {
+    name: string,
+    surname: string,
+    username: string
+}
+
+const AuthorInfo: React.FC<Props> = ({username}: Props) => {
     const { theme } = useTheme();
     return (
         
@@ -11,8 +17,7 @@ const AuthorInfo: React.FC = () => {
                 <img src="/img/ава_конь_тёмный_фон.svg" alt="Авторский аватар" />
             </div>
             <div className={styles.author_details}>
-                <h2>author</h2>
-                <p>@author_nickname</p>
+                <h2>@{username}</h2>
                 <p>Автор статей, тренер.</p>
             </div>
         </div>
