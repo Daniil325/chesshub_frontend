@@ -5,7 +5,7 @@ import AuthorInfo from "./components/AuthorInfo/AuthorInfo";
 import Tabs from "./components/Tabs/Tabs_subscribers";
 import Subscribers from "./components/Subscribers/Subscribers";
 import { LocalizationProvider } from "./components/LocalizationContext";
-import LanguageSwitcher from "./components/LanguageSwitcher";
+import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
 
 
 const App: React.FC = () => {
