@@ -1,0 +1,66 @@
+.content {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    margin: 0;
+  }
+  
+  .actions {
+    display: flex;
+  }
+  
+  .export-button, .add-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .export-button {
+    background-color: #333;
+    color: white;
+  }
+  
+  .add-button {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .search-bar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-button, .clear-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .search-button {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .clear-button {
+    background-color: #ff4081;
+    color: white;
+  }

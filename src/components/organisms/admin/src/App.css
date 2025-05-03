@@ -1,0 +1,16 @@
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #1a1a1a;
+  color: white;
+  width: 250px;
+  padding: 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
