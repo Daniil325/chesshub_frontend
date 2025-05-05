@@ -21,6 +21,13 @@ export const userApi = createApi({
         }),
         getProfile: build.query({
             query: (username) => ({ url: `user/profile/${username}`, method: "GET" }),
+        }),
+        updateProfile: build.mutation({
+            query: (body) => ({
+                url: `user/profile/${body['username']}`,
+                method: "PATCH",
+                body
+            })
         })
     }),
 });
@@ -35,7 +42,6 @@ const userState = {
 export function userReducer(state = userState, action) {
     switch (action.type) {
         case "AUTH":
-            console.log(action)
             return {
                 ...state,
                 isLogin: true,

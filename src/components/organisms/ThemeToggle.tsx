@@ -5,8 +5,8 @@ const ThemeToggle: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
 
     
-    const lightIcon = "./img/светлая_тема.svg"; 
-    const darkIcon = "./img/тёмная_тема.svg"; 
+    const lightIcon = "/public/img/светлая_тема.svg"; 
+    const darkIcon = "/public/img/тёмная_тема.svg"; 
 
     return (
         <button 
@@ -20,7 +20,6 @@ const ThemeToggle: React.FC = () => {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-               
             }}
             aria-label={theme === "dark" ? "Переключить на светлую тему" : "Переключить на тёмную тему"}
         >

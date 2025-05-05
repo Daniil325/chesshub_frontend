@@ -27,19 +27,23 @@ type Props = {
     img: string;
     title: string;
     pubDate: string;
+    username: string
 };
 
 const formatDateTime = (date) => {
     return format(date, "dd.MM.yyyy HH:mm:ss");
 };
 
-export const Article: React.FC<Props> = ({ id, img, title, pubDate }: Props) => {
+export const Article: React.FC<Props> = ({ id, img, title, pubDate, username }: Props) => {
     const { theme } = useTheme();
-    console.log(id)
 
-    const { data, isLoading, isError, isFetching } =
-        articleApi.useGetArticlesQuery();
-    console.log(data);
+    console.log(id, img, title, pubDate, username)
+
+    const { isLoading, isFetching } = articleApi.useGetArticlesQuery();
+
+    if (isFetching) {
+        return <h1>Loading</h1>;
+    }
 
     if (isLoading) {
         return <h1>Loading</h1>;
@@ -58,7 +62,7 @@ export const Article: React.FC<Props> = ({ id, img, title, pubDate }: Props) => 
                         src="/img/ава_конь_тёмный_фон.svg"
                         alt="Author Avatar"
                     />
-                    <span className={styles.nickname}>author nickname</span>
+                    <span className={styles.nickname}>{username}</span>
                     <span className={styles.pub_date}>
                         {formatDateTime(pubDate)}
                     </span>
@@ -83,8 +87,8 @@ export const Article: React.FC<Props> = ({ id, img, title, pubDate }: Props) => 
                 <div className={styles.reactions}>
                     <span className={styles.article_stat}>
                         <DynamicIcon
-                            lightSrc="/img/иконка_зелён_светлая.svg"
-                            darkSrc="/img/иконка_зелён_тёмная.svg"
+                            lightSrc="/public/иконка_зелён_светлая.svg"
+                            darkSrc="/public/иконка_зелён_тёмная.svg"
                             alt="Likes"
                             className={styles.icon_reaction}
                         />
@@ -93,8 +97,8 @@ export const Article: React.FC<Props> = ({ id, img, title, pubDate }: Props) => 
 
                     <span className={styles.article_stat}>
                         <DynamicIcon
-                            lightSrc="/img/иконка_красн_светлая.svg"
-                            darkSrc="/img/иконка_красн_тёмная.svg"
+                            lightSrc="/public/иконка_красн_светлая.svg"
+                            darkSrc="/public/иконка_красн_тёмная.svg"
                             alt="Dislikes"
                             className={styles.icon_reaction}
                         />

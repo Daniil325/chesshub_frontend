@@ -2,8 +2,8 @@ import styles from "./style.module.css";
 import React from "react";
 import { useTheme } from "../ThemeContext";
 import { articleApi } from "@/store/article";
-import { ChessboardView } from "@/entities/Chessboard/Chessboard";
-
+import { Chessboard } from "@/entities/Chessboard/Chessboard";
+import { format } from "date-fns";
 
 const DynamicIcon: React.FC<{
     lightSrc: string;
@@ -22,45 +22,72 @@ const DynamicIcon: React.FC<{
     );
 };
 
-export const ArticlePOST: React.FC = ({id}) => {
+
+const formatDateTime = (date) => {
+    return format(date, "dd.MM.yyyy HH:mm:ss");
+};
+
+
+export const ArticlePOST: React.FC = ({ id }) => {
     const { theme } = useTheme();
-    const { data } = articleApi.useGetArticleQuery(id);
-    console.log(data)
+    const { data, isLoading } = articleApi.useGetArticleQuery(id);
 
-    if (data) {
-        const item = data["item"]
+    if (isLoading) {
+        return <h1>Loading</h1>;
+    }
 
-        return (
-            <article
-                className={`${styles.article} ${
-                    theme === "dark" ? styles.dark : ""
-                }`}
-            >
+    const item = data["item"];
+
+    return (
+        <article
+            className={`${styles.article} ${
+                theme === "dark" ? styles.dark : ""
+            }`}
+        >
+            <div className={styles.article_content}>
                 <div className={styles.author_info}>
                     <img
                         src="/img/ава_конь_тёмный_фон.svg"
                         alt="Author Avatar"
                         className={styles.avatar}
                     />
-                    <span className={styles.nickname}>author nickname</span>
-                    <span className={styles.date}>11.09.2001</span>
+                    <span className={styles.nickname}>{item["username"]}</span>
+                    <span className={styles.date}>{formatDateTime(item["pubDate"])}</span>
                 </div>
-                
-                <h2 className={styles.title}>
-                    {item["title"]}
-                </h2>
 
-                {item["content"]["blocks"].map(el => {
+                <h2 className={styles.title}>{item["title"]}</h2>
+                <img
+                    src={`http://127.0.0.1:9000/content-images/${item["preview"]}`}
+                    alt=""
+                />
+
+                {item.content.blocks.map((el) => {
                     if (el["type"] == "board") {
-                        console.log(el)
-                        return <ChessboardView defaultMoves={el["data"]}/>
+                        return (
+                            <div className="">
+                                <Chessboard
+                                    defaultMoves={el["data"]}
+                                    readOnly={true}
+                                    onDataChange={() => {}}
+                                />
+                            </div>
+                        );
                     }
                     if (el["type"] == "list") {
                         return (
                             <ul className={styles.list}>
-                                <li>{el["data"]["items"].map(it => it.content)}</li>
+                                <li>
+                                    {el["data"]["items"].map(
+                                        (it) => it.content
+                                    )}
+                                </li>
                             </ul>
-                        )
+                        );
+                    }
+                    if (el["type"] == "paragraph") {
+                        return (
+                            <p className={styles.text}>{el["data"]["text"]}</p>
+                        );
                     }
                 })}
 
@@ -99,9 +126,9 @@ export const ArticlePOST: React.FC = ({id}) => {
                         999
                     </span>
                 </div>
-            </article>
-        );
-    }
+            </div>
+        </article>
+    );
 };
 
 export default ArticlePOST;

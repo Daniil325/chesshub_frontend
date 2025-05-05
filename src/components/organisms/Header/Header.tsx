@@ -5,9 +5,11 @@ import ThemeToggle from "../ThemeToggle";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLoginState } from "@/hooks/useLoginState";
+import { useLocalization } from "@/LocalizationContext";
+import { translations } from "@/translations";
 
 export const Header: React.FC = () => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
 
     const { username, role } = useSelector((state) => {
         return {
@@ -18,6 +20,9 @@ export const Header: React.FC = () => {
 
     const isAuthenticated = useLoginState();
 
+    const { language } = useLocalization();
+    const t = translations[language];
+
     return (
         <header
             className={`${styles.header} ${
@@ -27,11 +32,11 @@ export const Header: React.FC = () => {
             <div className={styles.header_top}>
                 <h1 className={styles.header__title}>ChessHub</h1>
                 {isAuthenticated ? (
-                    <h3>Добро пожаловать {username}</h3>
+                    <h3>{t.header.greet} {username}</h3>
                 ) : (
                     <h3>
-                        <Link to="/register">Зарегистрируйтесь </Link>
-                         или <Link to="/login">Войдите</Link>
+                        <Link to="/register">{t.header.register} </Link>
+                        / <Link to="/login">{t.header.login}</Link>
                     </h3>
                 )}
 
@@ -47,12 +52,12 @@ export const Header: React.FC = () => {
                 <ul className={styles.header_nav__items}>
                     <li className={styles.header_nav__item}>
                         <Link className={styles.header_nav__link} to="/">
-                            Статьи
+                            {t.header.articles}
                         </Link>
                     </li>
                     <li className={styles.header_nav__item}>
                         <Link className={styles.header_nav__link} to="/course">
-                            Курсы
+                            {t.header.courses}
                         </Link>
                     </li>
                 </ul>

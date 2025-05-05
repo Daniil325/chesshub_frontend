@@ -1,0 +1,15 @@
+.language {
+    background-color: #3F2B12;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFF9F1;
+    font-weight: bold;
+    font-size: 23px;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: #3F2B12;
+    margin: 5px;
+  }
+
+  .language:hover{
+    background-color:#503d25;
+  }

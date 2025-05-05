@@ -2,10 +2,17 @@ import { Header } from "@/components/organisms/Header";
 import styles from "./style.module.css";
 import Article from "@/components/organisms/Article/Article";
 import { articleApi } from "@/store/article";
+import { useEffect } from "react";
 
 export function MainPage() {
-    const { data, isLoading, isError, isFetching } =
+    const { data, isLoading, isError, isFetching, refetch } =
         articleApi.useGetArticlesQuery();
+
+    useEffect(() => {
+        refetch();
+    }, [])
+    
+    console.log("sssss")
 
     if (isLoading) {
         return <h1>Loading</h1>;
@@ -24,6 +31,7 @@ export function MainPage() {
                                     img={el["preview"]}
                                     title={el["title"]}
                                     pubDate={el["pubDate"]}
+                                    username={el["username"]}
                                 />
                             );
                         })}

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import { useTheme } from "../ThemeContext";
+
 const Tabs: React.FC = () => {
     const { theme } = useTheme();
     return (

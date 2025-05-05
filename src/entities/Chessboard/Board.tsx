@@ -8,7 +8,7 @@ import { ChessboardContext } from "./Context";
 import { Piece } from "chess.js";
 import styles from "./styles.module.css";
 
-export const Board = () => {
+export const Board = ({readOnly=false}) => {
     const {
         game,
         fenPosition,
@@ -53,12 +53,12 @@ export const Board = () => {
                 <ChessboardDnDProvider>
                     <Chessboard
                         position={fenPosition}
-                        onPieceDrop={isHidden ? onDrop : handlePieceDrop}
+                        onPieceDrop={readOnly ?  null : (isHidden ? onDrop : handlePieceDrop)}
                         autoPromoteToQueen={true}
                         boardOrientation={boardOrientation}
                         className={styles.board_container}
-                        onSparePieceDrop={handleSparePieceDrop}
-                        onPieceDropOffBoard={handlePieceDropOffBoard}
+                        onSparePieceDrop={readOnly ?  null : handleSparePieceDrop}
+                        onPieceDropOffBoard={readOnly ?  null : handlePieceDropOffBoard}
                     />
 
                     <div className={isHidden ? "d-none" : "d-block"}>

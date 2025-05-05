@@ -24,11 +24,15 @@
     transition: background-color 0.3s ease;
 }
 
+.article_content {
+    max-width: 1300px;
+    margin: auto;
+}
+
 .author_info {
     display: flex;
     align-items: center;
     gap: 20px;
-    margin-left: 25px;
     margin-bottom: 20px;
 }
 
@@ -63,7 +67,6 @@
     font-size: 32px;
     font-weight: 800;
     color: var(--text-color-title);
-    margin: 39px 53px 26px;
 }
 
 .views {
@@ -87,7 +90,6 @@
     font-size: 25px;
     font-weight: 700;
     color: var(--text-color-title);
-    margin: 0px 45px 136px;
     margin-bottom: 30px;
 }
 

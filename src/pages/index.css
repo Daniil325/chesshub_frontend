@@ -33,6 +33,11 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.content {
-
+.tabs {
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--tab-text-color); 
+  text-decoration: none;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }

@@ -1,176 +1,242 @@
-import React, { useMemo, useState, useEffect } from 'react'
-import { useForm, Controller } from 'react-hook-form';
-import axios from 'axios';
-import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
-import Modal from '../components/Modal';
-import './UsersPage.css';
+import React, { useMemo, useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
+import {
+    useReactTable,
+    getCoreRowModel,
+    getSortedRowModel,
+    getPaginationRowModel,
+    flexRender,
+    ColumnDef,
+} from "@tanstack/react-table";
+import Modal from "../components/Modal";
+import "./UsersPage.css";
+import { InputText } from "primereact/inputtext";
+import { Card } from "primereact/card";
+import { Button } from "primereact/button";
+import { Sidebar } from "../components/Sidebar";
 
-// Типы для данных пользователя
-type UserRole = 'Admin' | 'Editor' | 'Viewer';
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  role: UserRole;
-  status: 'active' | 'inactive';
-  lastLogin: string;
+function isValidEmail(email: string) {
+    const reg = /\S+@\S+\.\S+/;
+    return reg.test(email);
 }
 
-const UsersPage: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const fetchUsers = async (setData) => {
+    try {
+        const response = await axios.get("http://localhost:8000/user");
+        setData(response.data);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+    }
+};
 
-  // Инициализация React Hook Form
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<User>();
+// Типы для данных пользователя
 
-  // Получение данных с сервера
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
+const UsersTable = ({ users, setUsers }) => {
+    const handleDeleteUser = async (userId: number) => {
+        try {
+            await axios.delete(`http://localhost:8000/api/users/${userId}`);
+            setUsers(users.filter((user) => user.id !== userId));
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
     };
-    fetchUsers();
-  }, []);
 
-  // Добавление нового пользователя
-  const handleAddUser = async (data: User) => {
-    try {
-      const response = await axios.post('http://localhost:8000/api/users', data);
-      setUsers([...users, response.data]);
-      reset(); // Очистка формы
-      setIsModalOpen(false); // Закрытие модального окна
-    } catch (error) {
-      console.error('Error adding user:', error);
+    const columns = useMemo<ColumnDef<User>[]>(
+        () => [
+            { header: "ID", accessorKey: "id" },
+            { header: "Name", accessorKey: "name" },
+            { header: "Email", accessorKey: "email" },
+            { header: "Role", accessorKey: "role" },
+            {
+                header: "Actions",
+                cell: ({ row }) => (
+                    <button onClick={() => handleDeleteUser(row.original.id)}>
+                        Delete
+                    </button>
+                ),
+            },
+        ],
+        []
+    );
+
+    const table = useReactTable({
+        data: users["items"],
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+    });
+
+    return (
+        <>
+            <table className="users-table">
+                <thead>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <tr key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => (
+                                <th key={header.id}>
+                                    {flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext()
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody>
+                    {table.getRowModel().rows.map((row) => (
+                        <tr key={row.id}>
+                            {row.getVisibleCells().map((cell) => (
+                                <td key={cell.id}>
+                                    {flexRender(
+                                        cell.column.columnDef.cell,
+                                        cell.getContext()
+                                    )}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* Пагинация */}
+            <div className="pagination-controls">
+                <button
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    {"< Prev"}
+                </button>
+                <button
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    {"Next >"}
+                </button>
+            </div>
+        </>
+    );
+};
+
+const UsersPage: React.FC = () => {
+    const [users, setUsers] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Инициализация React Hook Form
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
+
+    // Получение данных с сервера
+    useEffect(() => {
+        fetchUsers(setUsers);
+    }, []);
+
+    // Добавление нового пользователя
+    const handleAddUser = async (data) => {
+        console.log(data);
+        try {
+            const response = await axios.post(
+                "http://localhost:8000/user/register",
+                data
+            );
+            fetchUsers(setUsers);
+            reset(); // Очистка формы
+            setIsModalOpen(false); // Закрытие модального окна
+        } catch (error) {
+            console.error("Error adding user:", error);
+        }
+    };
+
+    if (users.length != 0) {
+        return (
+            <div className="app">
+                <Sidebar />
+                <div className="users-page">
+                    <h1>User Management</h1>
+
+                    {/* Кнопка для открытия модального окна */}
+                    <button
+                        className="add-user-button"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        Add New User
+                    </button>
+
+                    {/* Модальное окно */}
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                    >
+                        <h2>Add New User</h2>
+                        <Card
+                            className="flex align-items-center justify-content-center mt-3 m-auto bg-white-alpha-10"
+                            title="Регистрация"
+                        >
+                            <form
+                                className="flex flex-column gap-3"
+                                onSubmit={handleSubmit(handleAddUser)}
+                            >
+                                <InputText
+                                    {...register("username", {
+                                        required: true,
+                                    })}
+                                    placeholder="Username"
+                                />
+                                {errors.username && (
+                                    <p>This field is required</p>
+                                )}
+                                <InputText
+                                    {...register("name", { required: true })}
+                                    placeholder="First name"
+                                />
+                                {errors.name && <p>This field is required</p>}
+                                <InputText
+                                    {...register("surname", { required: true })}
+                                    placeholder="First name"
+                                />
+                                {errors.surname && (
+                                    <p>This field is required</p>
+                                )}
+                                <InputText
+                                    {...register("email", {
+                                        required: true,
+                                        validate: (value) =>
+                                            isValidEmail(value) ||
+                                            "Invalid email format", // Добавляем кастомную валидацию
+                                    })}
+                                    placeholder="email"
+                                />
+                                {errors.email && <p>This field is required</p>}
+
+                                <InputText
+                                    {...register("password", {
+                                        required: true,
+                                    })}
+                                    placeholder="Password"
+                                />
+                                {errors.password && (
+                                    <p>This field is required</p>
+                                )}
+
+                                <Button
+                                    label="Добавить пользоателя"
+                                    severity="success"
+                                />
+                            </form>
+                        </Card>
+                    </Modal>
+
+                    <UsersTable users={users} setUsers={setUsers} />
+                </div>
+            </div>
+        );
     }
-  };
-
-  // Удаление пользователя
-  const handleDeleteUser = async (userId: number) => {
-    try {
-      await axios.delete(`http://localhost:8000/api/users/${userId}`);
-      setUsers(users.filter((user) => user.id !== userId));
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
-
-  // Конфигурация таблицы
-  const columns = useMemo<ColumnDef<User>[]>(
-    () => [
-      { header: 'ID', accessorKey: 'id' },
-      { header: 'Name', accessorKey: 'name' },
-      { header: 'Email', accessorKey: 'email' },
-      { header: 'Role', accessorKey: 'role' },
-      { header: 'Status', accessorKey: 'status' },
-      { header: 'Last Login', accessorKey: 'lastLogin' },
-      {
-        header: 'Actions',
-        cell: ({ row }) => (
-          <button onClick={() => handleDeleteUser(row.original.id)}>Delete</button>
-        ),
-      },
-    ],
-    []
-  );
-
-  const table = useReactTable({
-    data: users,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-
-  return (
-    <div className="users-page">
-      <h1>User Management</h1>
-
-      {/* Кнопка для открытия модального окна */}
-      <button className="add-user-button" onClick={() => setIsModalOpen(true)}>
-        Add New User
-      </button>
-
-      {/* Модальное окно */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2>Add New User</h2>
-        <form onSubmit={handleSubmit(handleAddUser)} className="add-user-form">
-          <div>
-            <label>Name:</label>
-            <input
-              {...register('name', { required: 'Name is required' })}
-              placeholder="Enter name"
-            />
-            {errors.name && <span>{errors.name.message}</span>}
-          </div>
-          <div>
-            <label>Email:</label>
-            <input
-              {...register('email', {
-                required: 'Email is required',
-                pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: 'Invalid email' },
-              })}
-              placeholder="Enter email"
-            />
-            {errors.email && <span>{errors.email.message}</span>}
-          </div>
-          <div>
-            <label>Role:</label>
-            <select {...register('role', { required: 'Role is required' })}>
-              <option value="Admin">Admin</option>
-              <option value="Editor">Editor</option>
-              <option value="Viewer">Viewer</option>
-            </select>
-            {errors.role && <span>{errors.role.message}</span>}
-          </div>
-          <div>
-            <label>Status:</label>
-            <select {...register('status', { required: 'Status is required' })}>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-            {errors.status && <span>{errors.status.message}</span>}
-          </div>
-          <button type="submit">Add User</button>
-        </form>
-      </Modal>
-
-      {/* Таблица пользователей */}
-      <table className="users-table">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>{flexRender(header.column.columnDef.header, header.getContext())}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Пагинация */}
-      <div className="pagination-controls">
-        <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          {'< Prev'}
-        </button>
-        <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          {'Next >'}
-        </button>
-      </div>
-    </div>
-  );
 };
 
 export default UsersPage;

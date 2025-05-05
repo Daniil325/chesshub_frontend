@@ -51,7 +51,7 @@ export const Login = () => {
                         />
                         {errors.password && <p>This field is required</p>}
     
-                        <Button label="Зарегистрироваться" severity="success" />
+                        <Button label="Войти" severity="success" />
                     </form>
                 </Card>
             </>

@@ -56,18 +56,14 @@ const Article: React.FC = () => {
             
             <div className={styles.reactions}>
                 <span className={styles.reaction}>
-                    <img src="/img/layer1.svg" alt="Reaction Icon" className={styles.layer1} />
+                    <img src="/public/layer1.svg" alt="Reaction Icon" className={styles.layer1} />
                 </span>
                 <span className={styles.reaction}>
-                    <img src="/img/комм_пост.svg" alt="Comment Icon" className={styles.komm_post} />
+                    <img src="/public/иконка_зелён.svg" alt="Positive Reaction" className={styles.icongreen} />
                     999
                 </span>
                 <span className={styles.reaction}>
-                    <img src="/img/иконка_зелён.svg" alt="Positive Reaction" className={styles.icongreen} />
-                    999
-                </span>
-                <span className={styles.reaction}>
-                    <img src="/img/иконка_красн.svg" alt="Negative Reaction" className={styles.iconred} />
+                    <img src="/public/иконка_красн.svg" alt="Negative Reaction" className={styles.iconred} />
                     999
                 </span>
             </div>

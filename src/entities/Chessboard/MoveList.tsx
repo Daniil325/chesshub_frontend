@@ -2,7 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { ChessboardContext } from "./Context";
 import styles from "./styles.module.css";
 
-export const MoveList = ({handleChange, defaultMoves = []}) => {
+export const MoveList = ({
+    handleChange,
+    defaultMoves = [],
+    readOnly = false,
+}) => {
     const {
         moveLog,
         currentIndex,
@@ -15,15 +19,14 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
         setIsHidden,
         isHidden,
         setCurrentIndex,
-
     } = useContext(ChessboardContext);
 
     useEffect(() => {
-        const a = Object.values(defaultMoves)
+        const a = Object.values(defaultMoves);
         setMoveLog(a);
     }, []);
 
-    console.log(moveLog)
+    console.log(moveLog);
 
     useEffect(() => {
         handleChange(moveLog);
@@ -74,14 +77,19 @@ export const MoveList = ({handleChange, defaultMoves = []}) => {
                         />{" "}
                         Перевернуть доску
                     </p>
-                    <p className={styles.menu_item} onClick={onToolOpenClick}>
-                        <img
-                            className={styles.menu_item_icon}
-                            src="/public/pen.png"
-                            alt=""
-                        />{" "}
-                        Редактор доски
-                    </p>
+                    {readOnly ? <></> : (
+                        <p
+                            className={styles.menu_item}
+                            onClick={onToolOpenClick}
+                        >
+                            <img
+                                className={styles.menu_item_icon}
+                                src="/public/pen.png"
+                                alt=""
+                            />{" "}
+                            Редактор доски
+                        </p>
+                    ) }
                 </div>
             </div>
 

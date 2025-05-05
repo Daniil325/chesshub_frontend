@@ -10,9 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@blocknote/core": "^0.29.1",
-    "@blocknote/mantine": "^0.29.1",
-    "@blocknote/react": "^0.29.1",
     "@editorjs/editorjs": "^2.30.8",
     "@editorjs/header": "^2.8.8",
     "@editorjs/image": "^2.10.2",
@@ -32,6 +29,7 @@
     "query-string": "^9.1.1",
     "react": "^19.0.0",
     "react-aria": "^3.37.0",
+    "react-aria-components": "^1.8.0",
     "react-chessboard": "^4.7.2",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",

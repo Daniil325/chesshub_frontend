@@ -1,92 +1,200 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './TagsPage.css';
+import React, { useMemo, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import {
+    useReactTable,
+    getCoreRowModel,
+    getSortedRowModel,
+    getPaginationRowModel,
+    flexRender,
+} from "@tanstack/react-table";
+import Modal from "../components/Modal";
+import "./UsersPage.css";
+import { InputText } from "primereact/inputtext";
+import { Card } from "primereact/card";
+import { Button } from "primereact/button";
+import { Sidebar } from "../components/Sidebar";
 
-// Интерфейс для тега
-interface Tag {
-  id: number;
-  name: string;
-}
+
+const fetchData = async (setData) => {
+  try {
+      const response = await axios.get("http://localhost:8000/tag");
+      setData(response.data);
+  } catch (error) {
+      console.error("Error fetching users:", error);
+  }
+};
+
+
+// Типы для данных пользователя
+
+const CategoryTable = ({ categories, setCategories }) => {
+    const handleDeleteUser = async (userId: number) => {
+        try {
+            await axios.delete(`http://localhost:8000/tag/${userId}`);
+            fetchData(setCategories);
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
+
+    const columns = useMemo(
+        () => [
+            { header: "ID", accessorKey: "id" },
+            { header: "Name", accessorKey: "name" },
+            {
+                header: "Actions",
+                cell: ({ row }) => (
+                    <button onClick={() => handleDeleteUser(row.original.id)}>
+                        Delete
+                    </button>
+                ),
+            },
+        ],
+        []
+    );
+
+    const table = useReactTable({
+        data: categories["items"],
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+    });
+
+    return (
+        <>
+            <table className="users-table">
+                <thead>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <tr key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => (
+                                <th key={header.id}>
+                                    {flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext()
+                                    )}
+                                </th>
+                            ))}
+                        </tr>
+                    ))}
+                </thead>
+                <tbody>
+                    {table.getRowModel().rows.map((row) => (
+                        <tr key={row.id}>
+                            {row.getVisibleCells().map((cell) => (
+                                <td key={cell.id}>
+                                    {flexRender(
+                                        cell.column.columnDef.cell,
+                                        cell.getContext()
+                                    )}
+                                </td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* Пагинация */}
+            <div className="pagination-controls">
+                <button
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    {"< Prev"}
+                </button>
+                <button
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    {"Next >"}
+                </button>
+            </div>
+        </>
+    );
+};
 
 const TagsPage: React.FC = () => {
-  const [tags, setTags] = useState<Tag[]>([]); // Инициализация как пустой массив
-  const [newTagName, setNewTagName] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Получение списка тегов
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/tag');
-        console.log('API Response:', response.data); // Проверка данных
+    // Инициализация React Hook Form
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
 
-        // Проверяем, является ли ответ массивом
-        if (Array.isArray(response.data)) {
-          setTags(response.data);
-        } else if (response.data && Array.isArray(response.data.data)) {
-          setTags(response.data.data); // Если данные находятся в поле `data`
-        } else {
-          console.error('Unexpected API response format:', response.data);
+    // Получение данных с сервера
+    useEffect(() => {
+        fetchData(setCategories);
+    }, []);
+
+    // Добавление нового пользователя
+    const handleAddUser = async (data) => {
+        console.log(data);
+        try {
+            const response = await axios.post(
+                "http://localhost:8000/tag",
+                data
+            );
+            fetchData(setCategories);
+            reset(); // Очистка формы
+            setIsModalOpen(false); // Закрытие модального окна
+        } catch (error) {
+            console.error("Error adding user:", error);
         }
-      } catch (error) {
-        console.error('Error fetching tags:', error);
-      }
     };
-    fetchTags();
-  }, []);
 
-  // Добавление нового тега
-  const handleAddTag = async () => {
-    if (!newTagName.trim()) return;
+    if (categories.length != 0) {
+        return (
+            <div className="app">
+                <Sidebar />
+                <div className="users-page">
+                    <h1>User Management</h1>
 
-    try {
-      const response = await axios.post('http://localhost:8000/tag', { name: newTagName });
-      setTags([...tags, response.data]); // Добавляем новый тег в список
-      setNewTagName(''); // Очищаем поле ввода
-    } catch (error) {
-      console.error('Error adding tag:', error);
+                    {/* Кнопка для открытия модального окна */}
+                    <button
+                        className="add-user-button"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        Add Category
+                    </button>
+
+                    {/* Модальное окно */}
+                    <Modal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                    >
+                        <h2>Add Category</h2>
+                        <Card
+                            className="flex align-items-center justify-content-center mt-3 m-auto bg-white-alpha-10"
+                        >
+                            <form
+                                className="flex flex-column gap-3"
+                                onSubmit={handleSubmit(handleAddUser)}
+                            >
+                                
+                                <InputText
+                                    {...register("name", { required: true })}
+                                    placeholder="First name"
+                                />
+                                {errors.name && <p>This field is required</p>}
+                               
+                                <Button
+                                    label="Добавить категорию"
+                                    severity="success"
+                                />
+                            </form>
+                        </Card>
+                    </Modal>
+
+                    <CategoryTable categories={categories} setCategories={setCategories} />
+                </div>
+            </div>
+        );
     }
-  };
-
-  // Удаление тега
-  const handleDeleteTag = async (id: number) => {
-    try {
-      await axios.delete(`http://localhost:8000/tag/${id}`);
-      setTags(tags.filter((tag) => tag.id !== id)); // Удаляем тег из списка
-    } catch (error) {
-      console.error('Error deleting tag:', error);
-    }
-  };
-
-  return (
-    <div className="tags-page">
-      <h1>Tags Management</h1>
-
-      {/* Форма добавления тега */}
-      <div className="add-tag-form">
-        <input
-          type="text"
-          placeholder="Enter tag name"
-          value={newTagName}
-          onChange={(e) => setNewTagName(e.target.value)}
-        />
-        <button onClick={handleAddTag}>Add Tag</button>
-      </div>
-
-      {/* Список тегов */}
-      <ul className="tags-list">
-        {tags.length > 0 ? (
-          tags.map((tag) => (
-            <li key={tag.id}>
-              {tag.name}
-              <button onClick={() => handleDeleteTag(tag.id)}>Delete</button>
-            </li>
-          ))
-        ) : (
-          <p>No tags available.</p>
-        )}
-      </ul>
-    </div>
-  );
 };
 
 export default TagsPage;

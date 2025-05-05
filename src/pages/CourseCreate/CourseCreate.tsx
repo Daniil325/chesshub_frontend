@@ -27,7 +27,6 @@ export const CreateCourse = () => {
     });
 
     const {data} = userApi.useGetProfileQuery(username)
-    console.log(data)
 
     const [addProduct, { isError }] = courseApi.useCreateCourseMutation();
 

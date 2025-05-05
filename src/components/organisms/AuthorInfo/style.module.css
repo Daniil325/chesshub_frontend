@@ -1,23 +1,20 @@
-
 :root {
-    --author-bg-color: #FFF9F1; 
-    --text-color: #3F2B12; 
-    --avatar-filter: none; 
+    --author-bg-color: #fff9f1;
+    --text-color: #3f2b12;
+    --avatar-filter: none;
 }
 
-
 .dark {
-    --author-bg-color: #4B3F31; 
-    --text-color: #F0E8D1;
-  
+    --author-bg-color: #4b3f31;
+    --text-color: #f0e8d1;
 }
 
 .author_info {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: var(--author-bg-color); 
-    transition: background-color 0.3s ease; 
+    background-color: var(--author-bg-color);
+    transition: background-color 0.3s ease;
 }
 
 .avatar img {
@@ -25,19 +22,28 @@
     height: 100px;
     margin-left: 44px;
     filter: var(--avatar-filter);
-    transition: filter 0.3s ease; 
+    transition: filter 0.3s ease;
 }
 
 .author_details h2 {
     font-size: 36px;
     font-weight: 600;
-    color: var(--text-color); 
-    transition: color 0.3s ease; 
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
-.author_details p {
-    font-size: 36px;
+.edit_profile {
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+.author_details p,
+.edit_profile p {
+    font-size: 20px;
     font-weight: 500;
-    color: var(--text-color); 
-    transition: color 0.3s ease; 
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+.edit_profile p {
+    cursor: pointer;
 }

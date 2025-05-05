@@ -2,12 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar: React.FC = () => {
+export const Sidebar: React.FC = () => {
   const tabs = [
-    { name: 'Categories', path: '/categories' },
-    { name: 'Articles', path: '/articles' },
-    { name: 'Tags', path: '/tags' },
-    { name: 'Users', path: '/users' },
+    { name: 'Categories', path: '/admin/categories' },
+    { name: 'Tags', path: '/admin/tags' },
+    { name: 'Users', path: '/admin/users' },
   ];
 
   return (
@@ -26,4 +25,3 @@ const Sidebar: React.FC = () => {
   );
 };
 
-export default Sidebar;

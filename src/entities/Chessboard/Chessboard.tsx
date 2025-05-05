@@ -3,7 +3,13 @@ import { Board } from "./Board";
 import styles from "./styles.module.css";
 import { MoveList } from "./MoveList";
 
-export const Chessboard = ({ data, onDataChange, readOnly }) => {
+type Props = {
+    onDataChange: () => void,
+    readOnly: boolean,
+    defaultMoves: string[]
+}
+
+export const Chessboard = ({ onDataChange, readOnly, defaultMoves }: Props) => {
     const handleChange = (event) => {
         onDataChange(event);
     };
@@ -11,20 +17,13 @@ export const Chessboard = ({ data, onDataChange, readOnly }) => {
     return (
         <ChessboardProvider>
             <div className={styles.chessboard_container}>
-                <Board />
-                <MoveList handleChange={handleChange} />
+                <Board readOnly={readOnly} />
+                <MoveList
+                    handleChange={handleChange}
+                    defaultMoves={defaultMoves}
+                    readOnly={readOnly}
+                />
             </div>
         </ChessboardProvider>
     );
 };
-
-export const ChessboardView = ({defaultMoves}) => {
-    return (
-        <ChessboardProvider>
-            <div className={styles.chessboard_container}>
-                <Board />
-                <MoveList handleChange={() => {}} defaultMoves={defaultMoves} />
-            </div>
-        </ChessboardProvider>
-    );
-}

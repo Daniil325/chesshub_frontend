@@ -51,14 +51,11 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
                 });
 
                 if (move && currentIndex == moveLog.length) {
-                    // setGame(new Chess(game.fen()));
                     setFenPosition(game.fen());
                     const moveNotation = move.san;
                     setCurrentMove(moveNotation);
                     setMoveLog((prev) => [...prev, moveNotation]);
                     setCurrentIndex(moveLog.length + 1);
-
-                    //changeData((prev) => [...prev, moveNotation]);
                     return true;
                 }
             } catch (error) {

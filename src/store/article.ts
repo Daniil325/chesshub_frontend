@@ -24,7 +24,7 @@ export const articleApi = createApi({
             }),
         }),
         getArticle: build.query({
-            query: (username) => ({ url: `user/profile/${username}`, method: "GET" }),
+            query: (id) => ({ url: `article/${id}`, method: "GET" }),
         }),
     }),
 });

@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { articleApi } from "./article";
 import { courseApi } from "./course";
 import { userApi, userReducer } from "./user";

@@ -18,6 +18,8 @@
 .chessboard_container {
     display: flex;
     gap: 30px;
+    max-width: 800px;
+    margin: auto;
 }
 
 .board_container {
