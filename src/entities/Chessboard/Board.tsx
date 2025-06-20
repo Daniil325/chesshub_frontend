@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
     Chessboard,
     ChessboardDnDProvider,
@@ -8,7 +8,7 @@ import { ChessboardContext } from "./Context";
 import { Piece } from "chess.js";
 import styles from "./styles.module.css";
 
-export const Board = ({readOnly=false}) => {
+export const Board = ({ readOnly = false, defaultPosition }) => {
     const {
         game,
         fenPosition,
@@ -40,6 +40,14 @@ export const Board = ({readOnly=false}) => {
         "bK",
     ];
 
+    useEffect(() => {
+        if (defaultPosition) {
+            game.load(defaultPosition)
+            setFenPosition(game.fen())
+        }
+
+    }, [])
+
     return (
         <div
             className="div"
@@ -53,12 +61,12 @@ export const Board = ({readOnly=false}) => {
                 <ChessboardDnDProvider>
                     <Chessboard
                         position={fenPosition}
-                        onPieceDrop={readOnly ?  null : (isHidden ? onDrop : handlePieceDrop)}
+                        onPieceDrop={readOnly ? null : (isHidden ? onDrop : handlePieceDrop)}
                         autoPromoteToQueen={true}
                         boardOrientation={boardOrientation}
                         className={styles.board_container}
-                        onSparePieceDrop={readOnly ?  null : handleSparePieceDrop}
-                        onPieceDropOffBoard={readOnly ?  null : handlePieceDropOffBoard}
+                        onSparePieceDrop={readOnly ? null : handleSparePieceDrop}
+                        onPieceDropOffBoard={readOnly ? null : handlePieceDropOffBoard}
                     />
 
                     <div className={isHidden ? "d-none" : "d-block"}>

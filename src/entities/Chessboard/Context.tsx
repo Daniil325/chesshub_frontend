@@ -96,7 +96,7 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         const a = currentIndex + 1;
         setCurrentIndex(a);
         const moves = pgnFormat(moveLog.slice(0, a));
-        game.loadPgn(moves);
+        game.loadPgn(moves,  { strict: false });
         setFenPosition(game.fen());
     };
 
@@ -136,6 +136,7 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         }
         return success;
     };
+
     const handlePieceDrop = (sourceSquare, targetSquare, piece) => {
         const color = piece[0];
         const type = piece[1].toLowerCase();
@@ -153,10 +154,12 @@ export const ChessboardProvider: React.FC<ContextProps> = ({ children }) => {
         if (success) setFenPosition(game.fen());
         return success;
     };
+
     const handlePieceDropOffBoard = (sourceSquare) => {
         game.remove(sourceSquare);
         setFenPosition(game.fen());
     };
+
     const handleFenInputChange = (e) => {
         const fen = e.target.value;
         const { valid } = game.validate_fen(fen);

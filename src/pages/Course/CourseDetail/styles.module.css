@@ -1,0 +1,22 @@
+.course_info__container {
+    display: flex;
+}
+
+.course_info_text {
+    flex: 1 1 70%;
+}
+
+.course_info_author {
+    flex: 1 1 30%;
+    text-align: right;
+}
+
+.subscribe_button {
+    background: var(--header-bg-color);
+    width: max-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    color: #ecdfce;
+    font-weight: 700;
+}

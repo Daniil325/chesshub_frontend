@@ -1,0 +1,22 @@
+.lesson_container {
+    display: flex;
+    gap: 30px;
+}
+
+.lesson_list {
+    border: 1px solid var(--header-bg-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 10%;
+}
+
+.lesson_list p {
+    margin: 0;
+    border-bottom: 1px solid var(--header-bg-color);
+}
+
+.lesson_content h2 {
+    margin-top: 0;
+}

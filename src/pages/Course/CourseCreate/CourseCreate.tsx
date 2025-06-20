@@ -10,7 +10,6 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import List from "@editorjs/list";
-import Table from "@editorjs/Table";
 import { PreviewUpload } from "@/components/molecules/PreviewUpload/PreviewUpload";
 import styles from "./style.module.css";
 
@@ -38,7 +37,6 @@ const EditorComponent = ({ setContent }) => {
             tools: {
                 header: Header,
                 list: List,
-                table: Table,
             },
         });
     };

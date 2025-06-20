@@ -1,4 +1,6 @@
-import ArticlePOST from "@/components/organisms/ArticlePost/ArticlePost";
+
+import ArticlePOST from "@/components/organisms/ArticlePOST/ArticlePost";
+import { CourseDetail } from "@/pages/Course/CourseDetail/CourseDetail";
 import { MainPage } from "@/pages/Main";
 import Post from "@/pages/Post";
 import UserPage from "@/pages/ProfilePage/UserPage";
@@ -22,6 +24,9 @@ export const AppRouter = () => {
                 </Route>
                 <Route path="/user_posts">
                     <UserPage />
+                </Route>
+                <Route path="/course_detail">
+                    <CourseDetail />
                 </Route>
             </Routes>
         </BrowserRouter>

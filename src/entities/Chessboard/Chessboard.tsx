@@ -6,10 +6,11 @@ import { MoveList } from "./MoveList";
 type Props = {
     onDataChange: () => void,
     readOnly: boolean,
-    defaultMoves: string[]
+    defaultMoves: string[],
+    defaultPosition?: string
 }
 
-export const Chessboard = ({ onDataChange, readOnly, defaultMoves }: Props) => {
+export const Chessboard = ({ onDataChange, readOnly, defaultMoves, defaultPosition }: Props) => {
     const handleChange = (event) => {
         onDataChange(event);
     };
@@ -17,7 +18,7 @@ export const Chessboard = ({ onDataChange, readOnly, defaultMoves }: Props) => {
     return (
         <ChessboardProvider>
             <div className={styles.chessboard_container}>
-                <Board readOnly={readOnly} />
+                <Board readOnly={readOnly} defaultPosition={defaultPosition} />
                 <MoveList
                     handleChange={handleChange}
                     defaultMoves={defaultMoves}
