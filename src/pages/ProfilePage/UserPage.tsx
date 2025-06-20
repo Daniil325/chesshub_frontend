@@ -3,7 +3,6 @@ import { Header } from "@/components/organisms/Header";
 import Sidebar from "@/components/organisms/Sidebar/Sidebar";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
     Tabs as AriaTabs,
     TabList,
@@ -16,6 +15,7 @@ import Article from "@/components/organisms/Article/Article";
 import { CourseListItem } from "@/components/organisms/CourseListItem/CourseListItem";
 import { translations } from "@/translations";
 import { useLocalization } from "@/LocalizationContext";
+import styles from "./styles.module.css"
 
 const UserPage: React.FC = () => {
     const { username, role } = useSelector((state) => {
@@ -35,10 +35,10 @@ const UserPage: React.FC = () => {
     const t = translations[language];
 
     return (
-        <div className="app">
+        <>
             <Header />
             <main className="main">
-                <section className="content">
+                <section className={styles.content}>
                     <AuthorInfo username={username} />
                     <AriaTabs>
                         <TabList
@@ -97,7 +97,7 @@ const UserPage: React.FC = () => {
                 </section>
                 <Sidebar />
             </main>
-        </div>
+        </>
     );
 };
 

@@ -1,0 +1,8 @@
+.title {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    font-weight: bold;
+    font-size: 30px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}

@@ -25,6 +25,7 @@ export const CoursesList = () => {
                                 description={el["description"]["description"]}
                                 price={el["price"]}
                                 author={el["author_username"]}
+                                preview={el["preview"]}
                             />
                         );
                     })}

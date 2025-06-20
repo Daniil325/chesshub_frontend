@@ -25,4 +25,13 @@ export default defineConfig({
             },
         ],
     },
+    server: {
+        proxy: {
+            "/media/": {
+                target: "http://127.0.0.1:9000",
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/media/, "/"),
+            },
+        },
+    },
 });

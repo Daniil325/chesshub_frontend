@@ -11,8 +11,6 @@ export function MainPage() {
     useEffect(() => {
         refetch();
     }, [])
-    
-    console.log("sssss")
 
     if (isLoading) {
         return <h1>Loading</h1>;

@@ -7,6 +7,11 @@
     margin-bottom: 20px;
 }
 
+.course_list_item__info {
+    display: flex;
+    gap: 50px;
+}
+
 .course_list_item__image {
     width: 100px;
     height: 100px;
@@ -20,4 +25,8 @@
 
 .styles.course_list_item__price {
     font-weight: 500;
+}
+
+.course_list_item_image img {
+    max-width: 300px;
 }
